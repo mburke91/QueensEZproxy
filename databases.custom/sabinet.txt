@@ -1,0 +1,5 @@
+# Sep22/2020
+# Keeping old stanza for now
+T      Sabinet Reference
+U      http://reference.sabinet.co.za/
+DJ     sabinet.co.za

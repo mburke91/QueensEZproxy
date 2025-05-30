@@ -1,0 +1,16 @@
+# Oct14/2020
+Option DomainCookieOnly
+Title ProView Thomson Reuters
+Option NoX-Forwarded-For
+HTTPHeader x-cobalt-*
+HTTPHeader X-Requested-With
+HTTPMethod DELETE
+HTTPMethod PUT
+HTTPMethod PATCH
+DomainJavaScript thomsonreuters.com
+Domain thomsonreuters.com
+URL https://proview.thomsonreuters.com
+URL https://proview.thomsonreuters.com/library.html?sponsor=QUNIV-1
+DJ proview.thomsonreuters.com
+H proview.thomsonreuters.com
+Option Cookie

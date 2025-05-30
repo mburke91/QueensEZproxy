@@ -1,0 +1,14 @@
+# Oct08/2020
+Title	University of Michigan - ICPSR
+URL	https://www.icpsr.umich.edu
+DJ      icpsr.umich.edu
+
+Title	Uiversity of Michigan - Digital Collections
+URL	https://quod.lib.umich.edu/lib/colllist/
+HJ	deepblue.lib.umich.edu
+HJ	ets.umdl.umich.edu
+HJ	hti.umich.edu
+HJ	name.umdl.umich.edu
+HJ	hdl.lib.umich.edu
+HJ	quod.lib.umich.edu
+DJ      lib.umich.edu

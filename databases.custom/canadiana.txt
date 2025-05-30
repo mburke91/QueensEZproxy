@@ -1,0 +1,9 @@
+# Sep18/2020
+T       Canadian Institute for Historical Microreproductions (CIHM)
+U       http://www.canadiana.org/
+U       http://canadiana.org/
+DJ      canadiana.org
+
+T       Early Canadiana Online
+U       http://eco.canadiana.ca/
+DJ      canadiana.ca

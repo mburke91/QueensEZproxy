@@ -1,0 +1,39 @@
+# Jul13/2020 ; updated Oct10/2022
+
+#Title Le Robert 
+#URL   https://petitrobert.lerobert.com
+#HJ    petitrobert.lerobert.com
+#DJ    lerobert.com
+
+#Title Le Robert Collins
+#URL   https://grc.lerobert.com
+#HJ    grc.lerobert.com
+#DJ    lerobert.com 
+
+# Existing Entries
+
+# Try to make into one entry
+T       DeMarque
+U       http://syrano.demarque.com
+DJ      demarque.com
+
+# Combine into one
+## Added as per issue #1843 on Apr 25, 2011
+#T       DeMarque
+#U       http://syrano.demarque.com/Access/connExt.php?idRelPC=531313
+#DJ      demarque.com
+
+# Combine into one
+## Added as per issue #1843 on Apr 25, 2011
+#T       Le Petit Robert
+#U       http://syrano.demarque.com/Access/connExt.php?idRelPC=531312
+#DJ      demarque.com
+
+
+# Entry Added for testing
+#Title Le Robert
+#URL https://petitrobert.lerobert.com
+#HJ petitrobert.lerobert.com
+#HJ https://grc.lerobert.com
+#HJ grc.lerobert.com
+#DJ lerobert.com

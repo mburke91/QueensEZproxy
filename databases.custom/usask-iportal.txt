@@ -1,0 +1,5 @@
+# Nov23/2021
+T iPortal
+U https://iportal.usask.ca/
+HJ iportal.usask.ca
+DJ usask.ca

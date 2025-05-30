@@ -1,0 +1,27 @@
+# Oct14/2020 ; updated Oct24/2022
+Option DomainCookieOnly
+HTTPHeader x-cobalt-*
+HTTPHeader X-Requested-With
+HTTPMethod DELETE
+HTTPMethod PUT
+HTTPMethod PATCH
+Title WestlawNext Canada (updated 20210419)
+MimeFilter application/json .* javascript
+URL https://nextcanada.westlaw.com/
+HJ https://nextcanada.westlaw.com
+HJ 1.next.westlaw.com
+HJ next.westlaw.com
+HJ ia-nextcanada.westlaw.com
+HJ nextcanada.westlaw.com
+DJ nextcanada.westlaw.com
+DJ westlaw.com
+NeverProxy c1.next.westlaw.com:443
+NeverProxy i1.next.westlaw.com:443
+NeverProxy j1.next.westlaw.com:443
+NeverProxy ca.next.westlaw.com:443
+NeverProxy ia.next.westlaw.com:443
+NeverProxy ja.next.westlaw.com:443
+NeverProxy a.next.westlaw.com:443
+NeverProxy ja-nextcanada.westlaw.com:443
+Option Cooki
+

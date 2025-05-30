@@ -1,0 +1,7 @@
+# Dec15/2021
+# Streaming server to no longer proxy at all... something doesn't work between the proxy and streaming server
+Title -hide Queen's Streaming Server
+NeverProxy stream.queensu.ca
+#URL	https://stream.queensu.ca
+#HJ	stream.queensu.ca
+#DJ	stream.queensu.ca

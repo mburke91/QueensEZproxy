@@ -1,0 +1,9 @@
+# Oct08/2020
+AddUserHeader X-User
+T VitalSource Resolver
+U https://resolver.vitalsource.com
+HJ https://resolver.vitalsource.com
+HJ resolver.vitalsource.com
+DJ vitalsource.com
+NeverProxy jigsaw.vitalsource.com
+NeverProxy bookshelf.vitalsource.com

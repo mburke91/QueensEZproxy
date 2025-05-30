@@ -1,0 +1,10 @@
+# Sep29/2020
+T       Women Writers Project
+U       http://www.wwp.northeastern.edu
+DJ      wwp.northeastern.edu
+
+# Old entry
+#T       Direct from the publisher
+#U       http://www.wwp.brown.edu
+#DJ      wwp.brown.edu
+#HJ      dl.lib.brown.edu:8080

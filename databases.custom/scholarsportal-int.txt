@@ -1,0 +1,9 @@
+# May 26/2022
+Title  -hide Scholars Portal internal sites
+URL    https://scholarsportal.info/
+HJ     https://jira.scholarsportal.info/
+HJ     https://dvtest.scholarsportal.info/
+HJ     https://dvdev.scholarsportal.info/
+HJ     https://dvs3.scholarsportal.info/
+HJ     https://galera.scholarsportal.info/
+HJ     https://spud.scholarsportal.info/

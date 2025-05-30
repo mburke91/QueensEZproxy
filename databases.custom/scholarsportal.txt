@@ -1,0 +1,59 @@
+# Sep29/2020
+T       Scholars Portal
+U       https://scholarsportal.info/
+DJ      scholarsportal.info
+DJ      https://scholarsportal.info
+
+# Redirects to scholarsportal.info....; combine with above??
+#T       -hide Scholars Portal Resolver
+#U       http://resolver.scholarsportal.info/
+#DJ      scholarsportal.info
+
+# Apr19/2021
+T       -hide Scholars Portal OJS Dev
+U       https://ojsdev.scholarsportal.info/
+HJ      ojsdev.scholarsportal.info
+DJ      scholarsportal.info
+
+Option MetaEZproxyRewriting
+Title	Scholars Portal GIS
+URL	http://geo1.scholarsportal.info
+DJ	geo1.scholarsportal.info
+HJ	geo1.scholarsportal.info
+DJ	geo2.scholarsportal.info
+HJ	geo2.scholarsportal.info
+NeverProxy geodl1.scholarsportal.info
+NeverProxy geodl2.scholarsportal.info
+Option NoMetaEZproxyRewriting
+NeverProxy rasters1.scholarsportal.info
+
+Title Scholars Portal Dataverse
+URL	https://dataverse.scholarsportal.info
+HJ	dataverse.scholarsportal.info
+DJ	dataverse.scholarsportal.info
+HTTPHeader Faces-Request
+
+Title Borealis
+U https://test.borealisdata.ca
+U https://dvdev.borealisdata.ca
+HJ borealisdata.ca
+HJ test.borealisdata.ca
+HJ dvdev.borealisdata.ca
+DJ borealisdata.ca
+
+T       Scholars Portal (Books)
+U       https://books.scholarsportal.info
+DJ      books.scholarsportal.info
+
+T       E-Journals @ Scholars Portal (2009 Mark Logic interface)
+U       https://journals.scholarsportal.info
+DJ      journals1.scholarsportal.info
+DJ      journals2.scholarsportal.info
+HJ      journals.scholarsportal.info
+HJ      journals1.scholarsportal.info
+HJ      journals2.scholarsportal.info
+
+T Scholars Portal Licensing
+U https://queens.scholarsportal.info
+DJ queens.scholarsportal.info
+HJ queens.scholarsportal.info

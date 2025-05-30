@@ -1,0 +1,10 @@
+# Sep22/2020
+Title Elsevier eLibrary Germany (updated 20200414)
+URL http://elsevierelibrary.de
+HJ elsevierelibrary.de
+HJ https://elsevierelibrary.de
+HJ https://www.elsevierelibrary.de
+HJ www.elsevierelibrary.de
+HJ https://institut.elsevierelibrary.de
+HJ institut.elsevierelibrary.de
+DJ elsevierelibrary.de

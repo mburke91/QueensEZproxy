@@ -1,0 +1,13 @@
+# Sep30/2020
+# York U Journals 
+T     Journal of Income Distribution 
+U     https://jid.journals.yorku.ca 
+DJ    jid.journals.yorku.ca 
+
+T     Canadian Woman Studies 
+U     https://cws.journals.yorku.ca 
+DJ    cws.journals.yorku.ca
+
+T     York U journals
+U     https://www.library.yorku.ca/web/collections/discover-our-collections/york-digital-journals-3/
+DJ    library.yorku.ca

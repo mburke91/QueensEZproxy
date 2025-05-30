@@ -1,0 +1,5 @@
+# Nov18/2020
+Title Queen's Economics
+#URL https://www.econ.queensu.ca/sites/econ.queensu.ca/files/Stata/
+URL https://www.econ.queensu.ca/
+DJ www.econ.queensu.ca

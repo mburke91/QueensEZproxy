@@ -1,0 +1,8 @@
+#Feb 2/2022
+T       Queen's University Library
+U       https://library.queensu.ca/
+HJ      library.queensu.ca
+HJ      db.library.queensu.ca
+HJ      stats.library.queensu.ca
+HJ      queens-only.library.queensu.ca
+DJ      library.queensu.ca
