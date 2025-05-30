@@ -1,4 +1,3 @@
 # QueensEZproxy
 
-Queen's EZproxy
-Paul testing things again
+the main config file (config.txt) and all our our stanzas used on EZProxy.
