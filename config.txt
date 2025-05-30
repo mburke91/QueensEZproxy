@@ -1,0 +1,3852 @@
+##  For more information on this file, see:
+##          http://www.oclc.org/support/documentation/ezproxy/cfg/
+##                                   AND  
+##          http://www.oclc.org/support/documentation/ezproxy/db/
+
+##  In this file, lines starting with # are comments.  The lines starting
+##  with ##  are meant solely as comments, whereas the lines starting with
+##  only # are followed by example entries.
+
+
+##  PLEASE NOTE: IF YOU CHANGE THIS FILE, you must restart EZproxy to make
+##  those changes take effect. == see http://www.oclc.org/support/documentation/ezproxy/restart.htm
+
+
+# ****************************EZproxy options *****************************************
+
+## After running 'EZproxy -c' to test connectivity as instructed in the install guides
+## (http://www.oclc.org/us/en/support/documentation/ezproxy/download/), 
+##  If necessary, Name your EZproxy server 
+## == http://www.oclc.org/support/documentation/ezproxy/cfg/name/
+
+# Name My.ezproxy.server
+#Name proxy.queensu.ca
+#Name qu-ezprx01-prd.mg.queensu.ca
+
+# QUEENSU - HOSTNAME MODIFIED FOR SHIBBOLETH SETUP - MARCH 2ND 2016
+Name proxy.queensu.ca
+
+##  EZproxy must be set to Proxy-by-port?or to Proxy-by-hostname:
+##  see http://www.oclc.org/support/documentation/ezproxy/portvshostname.htm
+##                             AND
+##  http://www.oclc.org/support/documentation/ezproxy/cfg/proxybyhostname.htm 
+
+# Option ProxyByHostname
+Option ProxyByHostname
+
+##  By default, EZproxy listens on port 2048. You can specify a different port here
+
+# LoginPort 80
+LoginPort 80
+
+##  SSL == see: http://www.oclc.org/support/documentation/ezproxy/cfg/ssl/
+##  If using Proxy by HostName you must use a wildcard SSL certificate
+##  Please review http://www.oclc.org/support/documentation/ezproxy/cfg/ssl/certopts.htm before implementing SSL 
+
+# LoginPortSSL 443
+LoginPortSSL 443
+
+
+## QUEENSU ##
+#LoginMenu /login?url=https://login.qu-ezprx01-prd.mg.queensu.ca/public/proxystart.html
+
+## Queensu IP Restrictions and Exceptions
+# Add address ranges to exclude from proxying here
+# Queen's campus does not need to log in
+ExcludeIP 130.15.1.1 - 130.15.255.255
+ExcludeIP 10.0.0.1 - 10.103.101.255
+ExcludeIP 10.103.103.1 -  10.255.255.255
+
+# Add addresses previously excluded for inclusion here
+# Use this to enable staff PCs to test EZProxy
+I 130.15.161.10
+I 130.15.161.47
+I 130.15.63.40
+I 130.15.120.206
+I 130.15.48.165
+I 130.15.70.212
+I 130.15.48.218
+I 130.15.48.129
+I 130.15.48.202
+A 10.212.134.26
+A 10.103.102.26
+I 10.103.102.26
+# Make exceptions for the hospital network, then again for certain research groups on that network
+I 130.15.179.1 - 130.15.179.255
+
+# E 130.15.179.31 - 130.15.179.70
+# E 130.15.179.72 - 130.15.179.74
+# Uncomment the above two lines to give GIDRU proper access through proxy
+
+# Force all traffic from off-campus building internal subnets to use the WebProxy
+# 385 Princess
+#I 10.108.102.1 - 10.108.102.254
+# 275 Queens Street
+I 10.103.102.1 - 10.103.102.254
+#55 Rideau St
+I 10.102.102.1 - 10.102.102.254
+
+# Force all trafic from VPN to not bypass the proxy
+# This is to solve a problem LaSalle Mews was having
+I 130.15.88.1 - 130.15.88.254
+A 10.45.240.0 - 10.45.255.255
+A 10.103.102.0 - 10.103.102.255
+
+# Add FortiNet VPN IPs (Apr16/2020 - ITrack 9857)
+#A 10.45.240.0 - 10.45.255.255  # This line appears twice; one just above, and other below
+#A 10.45.208.0 - 10.45.255.255
+# More restricitve for /20
+A 10.45.208.0 - 10.45.223.254
+
+# Auto-authenticate the following IP ranges (This is currently for testing)
+A 130.15.48.87
+
+
+# Make sure KGH does not need to log in
+#A 130.15.179.29
+## A 130.15.179.1 - 130.15.179.254
+#A 207.35.220.11
+
+##Above commented out on Feb. 2 2011 based on Change Control #1997
+
+# Do not allow the following addresses to use the proxy
+RejectIP 119.112.0.1 - 119.112.255.255
+RejectIP 121.31.127.185
+
+
+# QUEENSU - LOGINMENU MODIFIED FOR SHIBBOLETH SETUP - MARCH 2ND 2016
+LoginMenu /login?url=https://login.proxy.queensu.ca/public/proxystart.html
+
+# QUEENSU - SHIBBOLETH CONFIGURATION DIRECTIVES #
+ShibbolethDisable 1.3
+
+## SSO (on-campus Shib)
+#ShibbolethMetadata -EntityID=https://login.proxy.queensu.ca/shibboleth -File=login.proxy.queensu.ca-metadata.xml -Cert=7
+#ShibbolethMetadata -EntityID=https://login.proxy.queensu.ca/shibboleth -File=idp-metadata.xml -Cert=7 -URL=https://login.queensu.ca/idp/profile/Metadata/SAML
+
+## SSO (Azure MS SSO)
+ShibbolethMetadata -EntityID=https://login.proxy.queensu.ca/shibboleth -File=ms-metadata.xml -SignResponse=false -EncryptAssertion=false -Cert=7 -URL=https://login.microsoftonline.com/d61ecb3b-38b1-42d5-82c4-efb2838b925c/federationmetadata/2007-06/federationmetadata.xml?appid=8bfe865e-2c51-41ec-a36e-8b26fa4d7d63
+
+##  Connection limits. == see: http://www.oclc.org/support/documentation/ezproxy/cfg/limits.htm
+
+MaxConcurrentTransfers 300
+MaxLifetime 120
+MaxSessions 3000
+##MaxVirtualHosts 30000
+MaxVirtualHosts 40000
+
+##  When using Safari 2.0 and later with only three hostname components, Safari defaults to blocking the cookie. With EZproxy 3.6c GA
+## (2006-03-10) or later, you can add add the following to work around the restriction.
+# Option SafariCookiePatch
+Option SafariCookiePatch
+
+##  Securing EZproxy == see: http://www.oclc.org/support/documentation/ezproxy/example/securing.htm 
+
+Audit Most
+AuditPurge 14
+Option StatusUser
+#Option LogSession
+Option LogUser
+Option ForceHTTPSLogin
+RunAs ezproxy:ezproxy
+#IntruderIPAttempts -interval=5 -expires=15 20
+IntruderIPAttempts -interval=5 -expires=30 -reject=20 10
+#IntruderUserAttempts -interval=5 -expires=15 10
+IntruderUserAttempts -interval=5 -expires=30 5
+#UsageLimit -enforce -interval=15 -expires=120 -MB=100 Global
+UsageLimit -expires=1440 -MB=250 -IgnoreAutoLoginIP Global
+
+# Include an external IP blacklist file
+IncludeFile config-reject.txt
+
+##  Logging == see: http://www.oclc.org/support/documentation/ezproxy/cfg/logformat/
+##                                            AND
+##                  http://www.oclc.org/support/documentation/ezproxy/cfg/logfile/
+
+
+LogFormat %h %l %u %t "%r" %s %b
+LogFile ezp.log
+
+# **************************** Database Definitions *****************************************?
+##  See http://www.oclc.org/support/documentation/ezproxy/db/default.htm
+
+##  The following databases require no authentication,
+##  but demonstrate EZproxy functionality, and can be used for testing.
+##  Remove as desired.
+
+T Worldcat.org
+U https://worldcat.org
+HJ https://www.worldcat.org/
+HJ www.worldcat.org
+HJ worldcat.org
+DJ worldcat.org
+
+T WhatIsMyIP
+U http://whatismyip.com
+DJ whatismyip.com
+
+## ************************ USER DEFINED DATABASES *************************************************
+
+## The section below is for all other user-defined databases  
+## Please see: http://www.oclc.org/support/documentation/ezproxy/db/default.htm for configuration
+## information for common and supported stanzas
+## You may also want to join the EZproxy listserv ## To subscribe see: http://www.oclc.org/support/documentation/ezproxy/list.htm 
+
+ProxyURLPassword qproxurl
+
+# The books 24x7 site requires everyone to log in
+IncludeIP 130.15.1.0 - 130.15.255.255
+IncludeIP 10.0.0.0 - 10.255.255.255
+
+# Added Apr08/2021 -- New Config: Book24x7.com --
+# --> NOTE: stanza include here to keep close to includeIP control just above
+#           - try to move below later with or without the includeIP control
+IncludeFile databases/books24x7.txt
+
+# Added to resolve safelink issue
+T	Safelinks URL
+U	https://na01.safelinks.protection.outlook.com
+DJ	na01.safelinks.protection.outlook.com
+
+
+## Queensu IP Restrictions and Exceptions
+# Add address ranges to exclude from proxying here
+# Queen's campus does not need to log in
+ExcludeIP 130.15.1.1 - 130.15.255.255
+ExcludeIP 10.0.0.1 - 10.255.255.255
+
+# Add addresses previously excluded for inclusion here
+# Use this to enable staff PCs to test EZProxy
+I 130.15.161.10
+I 130.15.161.47
+I 130.15.63.40
+I 130.15.120.206
+I 130.15.48.165
+I 130.15.48.87
+I 130.15.70.212
+#I 130.15.48.218
+I 130.15.48.129
+I 10.103.102.26
+A 10.103.102.26
+
+# Make exceptions for the hospital network, then again for certain research groups on that network
+I 130.15.179.1 - 130.15.179.255
+# E 130.15.179.31 - 130.15.179.70
+# E 130.15.179.72 - 130.15.179.74
+# Uncomment the above two lines to give GIDRU proper access through proxy
+
+# Force all trafic from VPN to not bypass the proxy
+# This is to solve a problem LaSalle Mews was having
+I 130.15.88.1 - 130.15.88.254
+
+# Auto-authenticate the following IP ranges (This is currently for testing)
+A 10.45.240.0 - 10.45.255.255
+
+# A 130.15.48.189
+
+## Add FortiNet VPN IPs (Apr16/2020 - ITrack 9857)
+#A 10.45.208.0 - 10.45.255.255
+# More restricitve for /20
+A 10.45.208.0 - 10.45.223.254
+
+# Make sure KGH does not need to log in
+#A 130.15.179.29
+## A 130.15.179.1 - 130.15.179.254
+#A 207.35.220.11
+## A 130.15.48.189/32
+##Above commented out on Feb. 2 2011 based on Change Control #1997
+
+# Do not allow the following addresses to use the proxy
+RejectIP 119.112.0.1 - 119.112.255.255
+RejectIP 121.31.127.185
+#------------------------------------------------------
+#Default + Alumni
+
+# Alumni and default shared resources
+Group Alumni+Default
+IncludeFile databases/alexanderstreetpress.txt
+IncludeFile databases/amdigital.txt
+#IncludeFile databases/alexanderstreetpress.txt
+IncludeFile databases/cambridgecore.txt
+IncludeFile databases.custom/canadiana.txt
+IncludeFile databases/nrcresearchpress.txt
+IncludeFile databases/erudit.txt
+IncludeFile databases/crlgr.txt
+IncludeFile databases.custom/scholarsportal.txt
+IncludeFile databases/eiu.txt
+IncludeFile databases/gale.txt
+IncludeFile databases/iop.txt
+IncludeFile databases/nlxpm.txt
+IncludeFile databases/jstor.txt
+IncludeFile databases/proquest.txt
+IncludeFile databases/royal_society_chemistry.txt
+IncludeFile databases/sagepub.txt
+IncludeFile databases/taylor_francis_online.txt
+IncludeFile databases/wileyonlinelibrary.txt
+#----------------------------------------------------
+
+
+
+
+
+
+#------------------------------------------------------
+# The following entries are to allow the following users to only access
+# Webdev
+Group IStorm
+
+T  -hide Webapp Development
+U  https://webappdev.queensu.ca/
+DJ webappdev.queensu.ca
+
+#------------------------------------------------------
+# All entries below this line will only be accessable by users in the ITS group
+# NOTE: Move these definitions to an external include file
+Group ITS
+# Custom Queen's internal Access
+T	-hide Queen's IPAM
+U	https://ipam.queensu.ca/
+DJ	ipam.queensu.ca
+
+T	-hide LDAP-3
+U	https://ldap3.queensu.ca:8080
+DJ	ldap3.queensu.ca
+
+T	-hide LDAP-3 Preview
+U	https://ldap3-prev.queensu.ca:8080
+DJ	ldap3-prev.queensu.ca
+
+T	-hide LDAP-3 Development
+U	https://ldap3-dev.queensu.ca:8080
+DJ	ldap3-dev.queensu.ca
+
+# To Check: why dev env?
+# ** To clean duplicates... CHECK
+# Added as per issue #1917 on May 9, 2011
+T	-hide SSO preview
+U	https://epreview.its.queensu.ca
+DJ	epreview.its.queensu.ca
+
+#------------------------------------------------------
+# Added September 7 2018 - SkillSoft SSO Directive
+#  SSO -Secret=mzjkxhsh3yfrzr0xg5zdnedq -HASH=SHA256 -URL=https://queensu.skillport.com/skillportfe/ezproxy/ezproxy.action skillport
+#-------------------------------------------------------------------------
+
+Group QUL
+IncludeFile databases.custom/scholarsportal-int.txt
+
+
+Group Default
+
+## Stanzas using the proxy.queensu.ca URL as a base
+
+# Added by Curtis Ireland June 17, 2011 as a test
+# http://proxy.queensu.ca/login/thomsonone
+Title Thomson ONE
+URL thomsonone https://login.thomsonone.com/PooledAccess/2011-01-01/Validate.aspx?Expresslogincode=QueensUniv.edu
+#https://login.thomsononeqa.com/PooledAccess/2011-01-01/Validate.aspx?Express
+#logincode=QueensUniv.edu
+#URL https://login.thomsononeqa.com/PooledAccess/2011-01-01/Validate.aspx?Expresslogincode=QueensUniv.edu
+
+# http://proxy.queensu.ca/login/etp
+# QQ
+Option DomainCookieOnly
+Title Canadian Pharmacists Association e-Therapeutics+
+URL -Form=post -RewriteHost etp https://www.e-therapeutics.ca/wps/portal/!ut/p/.scr/Login/?auto=true
+FormVariable loginname=cps0096716
+FormVariable loginpassword=z0i6g1f
+FormVariable product=ETP
+DJ e-therapeutics.ca
+Option Cookie
+
+## Regular stanzas
+
+# Added Feb02/2022 -- New Config: QUL hosts --
+# Putting these at/near the top for maintainability
+IncludeFile databases.custom/queensu-library.txt
+
+T	Annales de l'institut Fourier
+U	https://aif.centre-mersenne.org
+DJ	centre-mersenne.org
+
+T	Collection of Czechoslovak Chemical Communications
+U	http://cccc.uochb.cas.cz
+DJ	uochb.cas.cz
+
+T	Canadian Centre for Occupational Health and Safety (CCOHS)
+U	http://ccinfoweb.cchst.ca/
+DJ	cchst.ca
+
+# QQ
+T	SIAM
+U	https://epubs.siam.org/
+DJ	siam.org
+
+T	OCLC
+U	https://firstsearch.oclc.org
+HJ	bibpurl.oclc.org
+HJ	firstsearch.oclc.org
+DJ	oclc.org
+
+T	International Association for Great Lakes Research
+U	https://iaglr.org
+DJ	iaglr.org
+
+T	ACD/Labs
+U	https://ilab.acdlabs.com/
+DJ	acdlabs.com
+
+T	Internet Archaeology
+U	https://intarch.ac.uk
+DJ	intarch.ac.uk
+
+T	Chem Ed XChange
+U	https://www.chemedx.org/
+DJ	chemedx.org
+
+T	UNB Journals
+U	https://journals.lib.unb.ca
+DJ	lib.unb.ca
+
+T	Latin American Network Information Center
+U	http://lanic.utexas.edu/
+DJ	utexas.edu
+
+T	LexiComp
+U	https://online.lexi.com
+DJ	lexi.com
+
+T	Institute of Physics (non-journal)
+U	https://physicsworld.com
+DJ	physicsworld.com
+
+T	Research - Refinitiv Financial
+U	https://research.thomsonib.com/
+DJ	thomsonib.com
+
+T	Religious and Theological Abstracts
+U	https://rtabstracts.org
+DJ	rtabstracts.org
+
+T	Marquis Biographies Online
+U	http://search.marquiswhoswho.com
+DJ	marquiswhoswho.com
+
+T	Metapress United Kingdom Serials Group
+U	https://serials.uksg.org
+DJ	uksg.org
+
+Title Thesaurus Linguae Graecae (Updated 20230505)
+HTTPHeader -request -process X-Requested-With
+URL https://stephanus.tlg.uci.edu/
+HJ http://stephanus.tlg.uci.edu/
+HJ stephanus.tlg.uci.edu
+DJ tlg.uci.edu
+
+# QQ
+Title	Canadian Standards Association
+URL	https://store.csagroup.org/ondemand/s/
+HJ	store.csagroup.org
+HJ	view.csagroup.org
+HJ	docs.csagroup.org
+HJ	csagateway.com
+DJ	csa-international.org
+DJ      csagroup.org
+DJ	csa.ca
+
+T	21st Century Music
+U	https://www.21st-centurymusic.com
+DJ	21st-centurymusic.com
+
+T	EDP Sciences - Astronomy & Astrophysics
+U	https://www.aanda.org
+DJ	aanda.org
+
+T	Annual Egyptological Bibliography
+U	http://www.aebnet.nl
+DJ	aebnet.nl
+
+T	American Geophysical Union
+U	https://www.agu.org
+DJ	agu.org
+
+T	American Institute of Aeronautics and Astronautics (AIAA)
+U	https://www.aiaa.org
+DJ	aiaa.org
+
+T	Ancient Narrative - University of Groningen Press
+U	http://www.ancientnarrative.com
+DJ	ancientnarrative.com
+
+T	Asiatica Association
+U	http://www.asiatica.org
+DJ	asiatica.org
+
+T	Association for the Sciences of Limnology and Oceanography
+U	https://www.aslo.org
+DJ	aslo.org
+
+T	Australian Mathematical Society
+U	https://www.austms.org.au/
+DJ	austms.org.au
+
+T	Canadian Baptists of Atlantic Canada
+U	https://www.baptist-atlantic.ca
+DJ	baptist-atlantic.ca
+
+T	Cambridge Center for Behavioral Studies
+U	https://www.behavior.org/
+DJ	behavior.org
+
+T	Berkeley Electronic Press
+U	https://www.bepress.com/
+DJ	bepress.com
+
+T	Bioline International
+U	http://www.bioline.org.br
+DJ	bioline.org.br
+
+T	Bibliography of Linguistic Literature
+U	https://www.blldb-online.de
+DJ	blldb-online.de
+
+T	Canadian Law List
+U	https://www.canadianlawlist.com/
+DJ	canadianlawlist.com
+
+T	Centres for Disease Control and Prevention (CDC)
+U	https://www.cdc.gov
+DJ	cdc.gov
+
+T	Central and Eastern European Online Library
+U	https://www.ceeol.com
+DJ	ceeol.com
+
+T	Coastal Education and Research Foundation & Journal of Coastal Research
+U	https://www.cerf-jcr.org
+DJ	cerf-jcr.org
+
+T	CHinese ANcient Texts Database (CHANT)
+U	http://www.chant.org/
+DJ	chant.org
+
+T	Chinamaxx
+U	http://www.chinamaxx.net
+DJ	chinamaxx.net
+
+T	Chornobyl Center
+U	https://www.chornobyl.net
+DJ	chornobyl.net
+
+T	Complete Index to World Film
+U	https://www.citwf.com
+DJ	citwf.com
+
+T	Clinical Practice and Epidemiology in Mental Health
+U	https://www.cpementalhealth.com/
+DJ	cpementalhealth.com
+
+T	Center for Research Libraries
+U	https://www.crl.edu
+DJ	crl.edu
+
+T	Data Trace Publishing Company
+U	https://www.datatrace.com
+DJ	datatrace.com
+
+T	Elsevier ScienceDirect Complete
+U	https://www.discoverygate.com
+DJ	discoverygate.com
+
+T	Doctrinal Plus
+U	http://www.doctrinal.fr
+DJ	doctrinal.fr
+
+T	Erudit
+U	https://www.erudit.org
+DJ	erudit.org
+
+T	Ethnologue
+U	https://www.ethnologue.com/
+DJ	ethnologue.com
+
+T	Evolutionary Ecology Research
+U	https://www.Evolutionary-Ecology.com
+DJ	Evolutionary-Ecology.com
+
+T	Geographical Association UK
+U	http://www.geography.org.uk
+DJ	geography.org.uk
+
+T	Hebrew Bibliography
+U	http://www.hebrew-bibliography.com/
+DJ	hebrew-bibliography.com
+
+T	Hindawi Publishing Journals
+U	https://www.hindawi.com
+DJ	hindawi.com
+
+T	International Journal of Developmental Biology
+U	http://www.ijdb.ehu.es
+DJ	ijdb.ehu.es
+
+Title Informed Librarian Online (updated 20180702)
+URL https://www.informedlibrarian.com
+HJ informedlibrarian.com
+DJ informedlibrarian.com
+
+T	Keesing's World News Archive
+U	http://www.keesings.com
+DJ	keesings.com
+
+# Korean databases for trial access
+T	KRpia Database
+U	https://www.krpia.co.kr/
+DJ	krpia.co.kr
+DJ	nurimedia.co.kr
+
+T	DBpia Database
+U	https://www.dbpia.co.kr
+DJ	dbpia.co.kr
+# End Korean databases for trial access
+
+T	Korean Studies Information (KSI)
+U	https://www.kstudy.com
+HJ	kiss.kstudy.com
+HJ	ebook.kstudy.com
+DJ	kstudy.com
+
+T	Kurt Weill Foundation for Music
+U	https://www.kwf.org
+DJ	kwf.org
+
+# To Check: access denied
+T	Reference Press
+U	https://www.libris.ca
+DJ	libris.ca
+
+T	Marchive
+U	https://www.marcive.com/
+DJ	marcive.com
+
+T	Mineralogical Association of Canada
+U	http://www.mineralogicalassociation.ca
+DJ	mineralogicalassociation.ca
+
+T	Materials Research Society
+U	https://www.mrs.org
+DJ	mrs.org
+
+T	Coutts MyiLibrary
+U	https://www.myilibrary.com
+DJ	myilibrary.com
+
+T	New Left Review
+U	https://www.newleftreview.org
+DJ	newleftreview.org
+HJ	www.newleftreview.net
+
+T	National Institute of Informatics (NII)
+U	https://www.nii.ac.jp/
+DJ	nii.ac.jp
+
+T	National Library of Scotland
+U	https://www.nls.uk/
+DJ	nls.uk
+
+T	Oceanalaw
+U	http://www.oceanalaw.com
+DJ	oceanalaw.com
+
+T	Institute Of Parasitology
+U	https://www.paru.cas.cz
+DJ	paru.cas.cz
+
+T	PE Media Network
+U	https://pemedianetwork.com
+DJ	pemedianetwork.com
+
+T	Population Reference Bureau
+U	https://www.prb.org
+DJ	prb.org
+
+T	Royal Australian College of General Practitioners (RACGP)
+U	https://www.racgp.org.au
+DJ	racgp.org.au
+
+T	Rinton Press
+U	https://www.rintonpress.com
+DJ	rintonpress.com
+
+T	Social Behavior and Personality
+U	https://www.sbp-journal.com
+DJ	sbp-journal.com
+
+T	Società Italiana di Fisica
+U	https://www.sif.it
+DJ	sif.it
+
+T	The Rheumatologist
+U	https://www.the-rheumatologist.org
+DJ	the-rheumatologist.org
+
+T	Unbound Medicine
+U	https://www.unboundmedicine.com/
+DJ	unboundmedicine.com
+
+T	Waterloo Directory of English Newspapers & Periodicals
+U	https://www.victorianperiodicals.com/series2
+DJ	victorianperiodicals.com
+
+T	zbMath Open
+U	https://zbmath.org
+DJ	zbmath.org
+
+T	Computer Assisted Language Instruction Consortium (CALICO)
+U	https://calico.org
+DJ	calico.org
+
+T	The Wire Report
+U	https://thewirereport.ca
+DJ	thewirereport.ca
+
+T NASA Astrophysics Data System
+U https://ui.adsabs.harvard.edu
+DJ adsabs.harvard.edu
+DJ adsdoc.harvard.edu
+DJ ads.harvard.edu
+DJ adswww.harvard.edu
+DJ adsbit.harvard.edu
+HJ adsabs.harvard.edu
+HJ adsdoc.harvard.edu
+HJ ads.harvard.edu
+HJ adswww.harvard.edu
+HJ adsbit.harvard.edu
+Option Cookie
+
+T ATLA
+U https://www.atla.com
+DJ atla.com
+
+T Bibliography and Index of Micropaleontology
+U https://www.micropress.org/bim/
+DJ micropress.org
+
+T Plunkett Research Online
+U https://www.plunkettresearchonline.com
+HJ plunkettresearchonline.com
+
+T Standard methods for the examination of water and wastewater
+U http://www.standardmethods.org/
+HJ www.standardmethods.org
+DJ www.standardmethods.org
+
+Title The Times UK
+U https://thetimes.co.uk
+DJ thetimes.co.uk
+HJ thetimes.co.uk
+Option Cookie
+
+# bajh: Added September 4 2008 for Liz Fox
+Title 	Social Science Research Network (SSRN)
+U 	https://www.ssrn.com
+DJ	ssrn.com
+
+Title 	DaSinD Online
+U	https://www.addf-kassel.de/kataloge/dasind/
+DJ	addf-kassel.de	
+
+Title	BDSL Online  
+U	https://www.bdsl-online.de/
+DJ 	bdsl-online.de
+
+Title 	allAfrica.com  
+U	https://allafrica.com
+DJ 	allAfrica.com  
+
+T	goENC.com
+U	https://www.goenc.com
+DJ	goenc.com
+
+T	Horn Book Guide Online
+U	https://www.hornbookguide.com/
+DJ	hornbookguide.com
+
+T	MERLOT: Multimedia Educational Resource for Learning and Online Teaching
+U	https://www.merlot.org/
+DJ	merlot.org
+
+T	Music-in-Print Series (emusicquest)
+U	http://www.emusicinprint.com/
+DJ	emusicinprint.com
+
+T	Latin American Newsletters
+U	https://latinnews.com/
+DJ	latinnews.com
+
+T	World Trade Online
+U	https://www.insidetrade.com/
+HJ	www.insidetrade.com
+DJ	insidetrade.com
+
+T	Columbia Gazetteer
+U	http://columbiagazetteer.org
+DJ	columbiagazetteer.org
+
+T	NBER Working Papers
+U	https://www.nber.org/papers/ 
+DJ	nber.org
+
+T	Patrologiae Graecae 
+U	http://phoenix.reltech.org/Ebind/docs/Migne/Migne.html
+D	reltech.org
+
+T	Ecological Society of America (Sept 2008)
+U	https://esapubs.org/archives
+DJ	esapubs.org
+
+T	Essential Evidence Plus (InfoPOEMs)
+U	https://www.essentialevidenceplus.com
+DJ	essentialevidenceplus.com
+
+T	Ab Imperio
+U	https://abimperio.net/
+DJ	abimperio.net
+
+T	New Scientist   
+U	https://www.newscientist.com/
+DJ	newscientist.com
+
+T	The Medical Letter
+U	https://medicalletter.org/institutions/queensu/
+DJ	medicalletter.org
+DJ	medlet-best.securesites.com
+
+T	The Charlston Advisor
+U	http://charlestonco.com/
+DJ	charlestonco.com
+
+T	American Association of Neurological Surgeons 
+U	https://www.aans.org/
+DJ	aans.org
+
+T	Artnet Price Database
+U	https://www.artnet.com/price-database/
+DJ	www.artnet.com
+
+T	Electronic Library of Mathematics
+U	https://www.emis.de/journals/short_index.html 
+DJ	www.emis.de
+
+T	Cold Spring Harbor Protocols
+U	http://www.cshprotocols.org/search.dtl 
+DJ	www.cshprotocols.org
+
+T	Australian Society of Anaesthetists Publications
+U	https://asa.org.au/ 
+DJ	www.asa.org.au
+
+T	Chemical Society of Japan
+U	https://www.chemistry.or.jp/journals/index-e.html 
+DJ	www.chemistry.or.jp
+
+# Added per issue #3797
+# Added per Issue #65135
+# QQ
+T	Chemical Society of Japan
+U	https://www.journal.csj.jp
+HJ	journal.csj.jp
+DJ	csj.jp
+
+# updated Jan01/2023
+Title Manchester Hive (updated 20200929)
+HTTPHeader -request -process X-Requested-With
+URL https://www.manchesterhive.com
+HJ https://manchesterhive.com
+HJ https://manchesteropenhive.com
+HJ https://www.manchesterhive.com
+HJ https://www.manchesteropenhive.com
+HJ www.manchesterhive.com
+HJ www.manchesteropenhive.com
+DJ manchesterhive.com
+DJ manchesteropenhive.com
+
+T	Mineralogical Society of America
+U	http://www.minsocam.org/ 
+DJ	www.minsocam.org
+
+T	PERSEE - Portail de revues scientifiques en sciences humaines et sociales
+U	https://www.persee.fr/ 
+DJ	www.persee.fr
+
+T	Thomas Land Publishers Inc.
+U	https://www.thomasland.com/ 
+DJ	www.thomasland.com
+
+T	Teachers College Record
+U	http://www.tcrecord.org/library/
+DJ	tcrecord.org
+
+T	Bulletin of the American Astronomical Society Electronic Edition
+U	https://baas.aas.org/
+DJ	aas.org
+
+T	Aldrichimica Acta
+U	https://www.sigmaaldrich.com/CA/en/life-science/sigma-aldrich
+DJ	sigmaaldrich.com
+
+# added for issue 2609 
+T	International Journal of Engineering Education
+U	https://www.ijee.ie
+DJ	ijee.ie
+
+# Disabled Aug25/2020; see below -- New Config: Oxford Journals --
+T	Oxford Encyclopedia of Women in World History
+U	http://www.oxford-womenworldhistory.com/?authstatuscode=202
+DJ	www.oxford-womenworldhistory.com
+
+T	Astronomical Society of the Pacific Conference Series
+U	https://www.aspbooks.org/a/volumes/table_of_contents/?book_id=89
+DJ	aspbooks.org
+
+# Added per issue #4593
+T	Classiques Garnier
+U	http://www.classiques-garnier.com/numerique-bases/login
+DJ	classiques-garnier.com
+
+T	CMAJ
+U	https://www.cmaj.ca
+DJ	cmaj.ca
+
+T	TESL Canada Journal
+U	https://www.teslcanadajournal.ca
+DJ	teslcanadajournal.ca
+
+T	Minds@UW
+U	https://minds.wisconsin.edu
+DJ	minds.wisconsin.edu
+
+T	Psychonomic Journals
+U	https://www.psychonomic-journals.org
+DJ	psychonomic-journals.org
+
+T	Career Cruising
+U	https://www.careercruising.com/home/autologin.aspx
+DJ	careercruising.com
+
+T	International Association of School Librarianship (IASL)
+U	https://www.iasl-online.org/
+DJ	iasl-online.org
+
+T	Video Librarian Online
+U	https://videolibrarian.com/
+DJ	videolibrarian.com
+
+T	The Mathematica Journal
+U	https://www.mathematica-journal.com
+DJ	mathematica-journal.com
+
+T	Times Educational Supplement
+U	https://www.tes.com/
+DJ	tes.co.uk
+DJ	tes.com
+
+T	WIT Journals Website
+U	https://www.witpress.com/journals
+DJ	witpress.com
+
+T	Imagine Canada
+U	https://www.imaginecanada.ca/
+DJ	imaginecanada.ca
+
+T	Conference of Socialists Economists
+U	https://www.cseweb.org.uk/
+DJ	cseweb.org.uk
+
+T	Contemporary OB/GYN
+U	https://www.contemporaryobgyn.net/
+DJ	contemporaryobgyn.net
+DJ	modernmedicine.com
+
+T	Resources Magazine (Resources for the Future)
+U	https://www.rff.org
+DJ	rff.org
+
+T	Renaissance Society of America
+U	https://www.rsa.org/
+DJ	rsa.org
+
+T	Mathematica Scandinavica
+U	https://www.mscand.dk/
+DJ	mscand.dk
+
+# Check: Requires FLASH
+# Added per issue #4024
+T	Scalable Gross Anatomy and Histology Image Catalogue (SGAHIC)
+U	http://sgahic.com/
+DJ	sgahic.com
+
+T	UNESCO
+U	https://portal.unesco.org
+DJ	unesco.org
+
+T	Lending Today
+U	https://www.leadingtoday.org
+DJ	leadingtoday.org
+
+T	National School Boards Association (NSBA)
+U	https://www.nsba.org
+DJ	nsba.org
+
+#Added May14/2025 to test Panopto links
+#T       Panopto
+#U       https://queensu.ca.panopto.com
+#DJ      queensu.ca.panopto.com
+
+# May26/2021
+T Institute of Materials (IMMAGE)
+U https://icon.iom3.org
+DJ icon.iom.org
+HJ iom.org
+
+T	The Journal of Philosophy
+U	https://www.journalofphilosophy.org/
+DJ	journalofphilosophy.org
+
+T	Center for Computer-Assisted Legal Instruction (CALI)
+U	https://www.cali.org
+DJ	cali.org
+
+T	Entomological Society of Canada
+U	https://www.esc-sec.ca/
+DJ	esc-sec.ca
+
+T	Canadian Cancer Society
+U	https://www.cancer.ca/en/
+DJ	cancer.ca
+
+T	Canadian Journal of Communication
+U	https://www.cjc-online.ca/index.php/journal
+DJ	cjc-online.ca
+
+T	RAIRO - Theoretical Informatics and Applications
+U	https://www.rairo-ita.org/
+DJ	rairo-ita.org
+
+T	one45 Software - Altus Assessments
+U	https://altusassessments.com
+DJ	altusassessments.com
+DJ	one45.com
+
+T	Botanical Society of America
+U	https://www.botany.org/
+DJ	botany.org
+
+T	Genetic Engineering & Biotechnology News
+U	https://www.genengnews.com/
+DJ	genengnews.com
+
+T	American Scientist
+U	https://www.americanscientist.org/
+DJ	americanscientist.org
+
+T	American Society of Cinematographers
+U	https://www.ascmag.com/
+DJ	ascmag.com
+
+T	Japan Institute of Metals and Materials (JIM)
+U	https://www.jim.or.jp
+DJ	jim.or.jp
+
+# Trial Entry - Added Apr. 26 2010
+# Trial Entry - removed May. 11 2010
+# readded Jan 27, 2011 per issue 1639
+T	Freedonia
+U	https://www.freedoniagroup.com
+DJ	freedoniagroup.com
+
+T	Opinion Archives
+U	https://metasearch.opinionarchives.com
+H	metasearch.opinionarchives.com
+H	search.opinionarchives.com
+DJ	opinionarchives.com
+
+T	Harper's Magazine
+U	https://www.harpers.org/
+DJ	harpers.org
+
+# Added as per isuue #1348
+T	American Society for Engineering Education
+U	https://asee.org
+DJ	asee.org
+
+# Added as per issue #1370 on July 22, 2010
+T       Advertising age
+U       https://www.adage.com
+DJ      adage.com
+
+# Added as per issue #1370 on July 22, 2010
+T       Canadian Tax Foundation
+U       https://www.ctf.ca
+DJ      ctf.ca
+
+# Added as per issue #1370 on July 22, 2010
+T       National Association of Elementary School Principals (NAESP)
+U       https://www.naesp.org
+DJ      naesp.org
+
+# Added as per issue #1370 on July 22, 2010
+T       Instrumentalist
+U       https://www.theinstrumentalist.com
+DJ      theinstrumentalist.com
+
+# Added as per issue #1370 on July 22, 2010
+T       Phi Delta Kappan - PDK International
+U       https://www.pdkintl.org
+DJ      pdkintl.org
+
+# Added as per issue #1370 on July 22, 2010
+T       National Council on Public History (NCPH)
+U       https://ncph.org
+DJ      ncph.org
+
+# Added as per issue #1370 on July 22, 2010
+T       RBM: a journal of rare books
+U       https://rbm.acrl.org
+DJ      acrl.org
+
+# Added as per issue #1370 on July 22, 2010
+T       Rivista di studi italiani
+U       https://www.rivistadistudiitaliani.it
+DJ      rivistadistudiitaliani.it
+DJ      rivistadistudiitaliani.com
+
+# Added as per issue #1370 on July 22, 2010
+T       MIT Technology Review
+U       https://www.technologyreview.com
+DJ      technologyreview.com
+
+# Added as per issue #1370 on July 22, 2010
+T       Value line investment survey online
+U       https://www.valueline.com
+DJ      valueline.com
+
+# Added as per issue #1394 on August 11, 2010
+T       The New Yorker
+U       https://www.newyorker.com
+DJ      newyorker.com
+
+# Added as per issue #1391 on August 11, 2010
+T       The Southeast Asian Journal of Tropical Medicine and Public Health
+U       https://www.tm.mahidol.ac.th/seameo/publication.htm
+DJ      tm.mahidol.ac.th
+
+# Added as per issue #1405 on August 23, 2010
+T       SciELO Espana
+U       https://scielo.isciii.es
+DJ      scielo.isciii.es
+
+# Added as per issue #1437 on September 7, 2010
+T       SciELO Brasil
+U       https://www.scielo.br
+DJ      scielo.br
+
+# Added as per issue #1406 on August 23, 2010
+T       Fabric Architecture
+U       https://fabricarchitecturemag.com
+DJ      fabricarchitecturemag.com
+
+# Added as per issue #1408 on August 23, 2010
+T       Geosynthetics Magazine
+U       https://geosyntheticsmagazine.com
+DJ      geosyntheticsmagazine.com
+
+# Added as per issue #1410 on August 23, 2010
+T       In Tents
+U       https://intentsmag.com
+DJ      intentsmag.com
+
+# Added as per issue #1411 on August 23, 2010
+T       Marine Fabricator
+U       https://marinefabricatormag.com
+DJ      marinefabricatormag.com
+
+# Added as per issue #1412 on August 23, 2010
+T       Specialty Fabrics Review
+U       https://specialtyfabricsreview.com
+DJ      specialtyfabricsreview.com
+
+# Added as per issue #1423 on August 30, 2010
+T       International Society for Technology in Education
+U       https://www.iste.org
+DJ      iste.org
+
+# Added as per issue #1425 on August 31, 2010
+T       Institute of Human Geography
+U       https://www.hugeog.com
+DJ      hugeog.com
+
+# Added as per issue #1429 on August 31, 2010
+T       Policy Study Commons
+U       https://www.psocommons.org
+DJ      psocommons.org
+
+# Added as per issue #1462 on September 23, 2010
+T       Society of Petroleum Engineers
+U       https://www.spe.org
+DJ      spe.org
+
+# Added as per issue #1480 on Oct 8, 2010
+T       American Society of Agronomy
+U       https://www.agronomy.org 
+DJ      agronomy.org
+
+# Added as per issue #1522 on Oct 28, 2010
+T       Commentary Magazine
+U       https://www.commentary.org
+DJ      commentary.org
+
+# Added as per issue #1539 on Nov 8, 2010
+T       Socialist Register
+U       https://socialistregister.com
+DJ      socialistregister.com
+
+# Added as per issue #1554 on Nov 18, 2010
+T       Societe Mathematique de France
+U       https://smf4.emath.fr
+DJ      emath.fr
+
+# Added as per issue #1555 on Nov 18, 2010
+T       Risk.net
+U       https://www.risk.net
+DJ      risk.net
+
+# Added as per issue #1556 on Nov 18, 2010
+T       Traffic Research
+U       https://www.trafficresearch.co.uk/
+DJ      trafficresearch.co.uk
+
+# Added as per issue #1559 on Nov 19, 2010
+T       Heterocycles
+U       https://www.heterocycles.jp
+DJ      heterocycles.jp
+
+# Added as per issue #1560 on Nov 19, 2010
+T       Foreign Affairs
+U       https://www.foreignaffairs.com
+DJ      foreignaffairs.com
+
+# Added as per issue #1578 on Dec 3, 2010
+T       EDGD Engineering Design Graphics Journal
+U       http://www.edgj.org
+D       edgj.org
+
+# Added -- BREPOLiS  -- as per issue #1605 on Jan 6, 2011; updated July 7, 2023; moved the stanzas from config.txt to brepolis.txt on Oct31/2024
+IncludeFile databases/brepolis.txt
+
+# Added as per issue #1615 on Jan 14, 2011
+T	Geological Association of Canada
+U	https://www.gac.ca
+DJ	gac.ca
+
+# Added as per issue #1632 on Jan 20, 2011
+T	PC Magazine
+U	https://www.pcmag.com
+DJ	pcmag.com
+
+# Added as per issue #1668 on Feb 11, 2011
+T	ACTA Press
+U	https://www.actapress.com/
+DJ	actapress.com
+
+# Added as per issue #1689 on Feb 24, 2011
+T       Quickscribe
+U       https://www.quickscribe.bc.ca
+DJ      quickscribe.bc.ca
+
+# Added as per issue #1736 on Mar 22, 2011
+T       Jewish review of books 
+U       https://www.jewishreviewofbooks.com
+DJ      jewishreviewofbooks.com
+
+# Added as per issue #1748 on Mar 23, 2011
+T       SEG Digital Library
+U       https://library.seg.org
+DJ      seg.org
+
+# Added as per issue #1797 on Apr 4, 2011
+T       JBI COnNECT+
+U       https://connectplus.jbi.global/
+DJ      jbiconnectplus.org
+DJ      jbi.global
+
+# Added as per issue #1793 on Apr 4, 2011
+T       The Chronicle of Higher Education
+U       https://chronicle.com
+DJ      chronicle.com
+
+# Added as per issue #1803 on Apr 5, 2011
+T       Theologische Literaturzeitung
+U       https://www.thlz.com
+DJ      thlz.com
+
+# Added as per issue #1818 on Apr 18, 2011
+T       International Union of Pure and Applied Chemistry
+U       https://www.iupac.org
+DJ      iupac.org
+
+# Added as per issue #1990 on May 30, 2011
+# QQ
+Title   The Hill Times online
+URL     https://www.hilltimes.com
+Domain  hilltimes.com
+
+# Added as per issue #2050 on June 17, 2011
+T       CEC Canadian Electroacoustic Comminity
+U       https://cec.sonus.ca/
+DJ      cec.sonus.ca
+
+# Added as per issue #2098 on July 4, 2011
+# QQ
+T       Canadian Aeronautics and Space Institute
+U       https://pubs.casi.ca/
+DJ      casi.ca
+
+# Added Title --  Edinburgh University Press   -- as per issue #2123 on July 15, 2011. Moved stanzas to euppublishing.txt on Oct31/2024
+#Edinburgh University Press Journal
+#QQ
+IncludeFile databases/euppublishing.txt
+
+
+# Added as per issue #2968 on July 25, 2012
+# QQ
+T	The Forestry Chronicle
+U	https://pubs.cif-ifc.org/loi/tfc
+DJ	cif-ifc.org
+
+# Added as per issue #2379 on Nov 13, 2011
+T       The National Interest
+U       https://nationalinterest.org
+DJ      nationalinterest.org
+
+# Added per issue #2440 on Dec 8, 2011
+T       The Journal of Clinical Ethics
+U       https://www.clinicalethics.com/
+DJ      clinicalethics.com
+
+# Added per issue #2479 on Jan 4, 2012
+T       PN Review 
+U       https://www.pnreview.co.uk
+DJ      pnreview.co.uk
+
+# No longer valid - Feb 17/2022
+# Added per issue #2488 on Jan 12, 2012
+#T       Toronto Star - Pages of the Past
+#U       http://pagesofthepast.ca
+#DJ      pagesofthepast.ca
+
+# Added per issue #2490 on Jan 13, 2012
+T       Universalis
+U       http://www.universalis-edu.com
+DJ      universalis-edu.com
+
+# Added per issue #2504 on Jan 20, 2012
+T       Trade Law Guide
+U       https://www.tradelawguide.com
+DJ      tradelawguide.com
+
+# Added per issue #2639
+T       Observatorio
+U       http://obs.obercom.pt
+DJ      obercom.pt
+
+# Added per issue #2734
+T       Royal Aeronautical Society
+U       https://aerosociety.com
+DJ      aerosociety.com
+
+# Added per issue #2767
+T       OPHEA
+U       https://www.ophea.net/
+DJ      ophea.net
+
+# Added per issue #2776
+T       University of Arizona
+U       https://repository.arizona.edu/handle/10150/635035
+DJ      arizona.edu
+
+# Added per issue #2811
+T       Pulp and Paper Technical Association of Canada
+U       https://www.paptac.ca
+DJ      paptac.ca
+
+# All hosted by Wiley.com now
+# Added per issue #2818
+#T       Soil
+#U       http://www.soils.org/publications/sssaj/index
+#DJ      soils.org
+
+# Added per issue #2901
+T       Nelson Digital Resources
+U       https://www.nelson.com
+DJ      nelson.com
+
+# Added per issue #2951
+T       Law Now
+U       https://www.lawnow.org
+DJ      lawnow.org
+
+# Added per issue #2959
+T       Monthly Review
+U       https://monthlyreview.org
+DJ      monthlyreview.org
+
+# Added per issue #3003
+# QQ
+T	Hydrocarbon Processing
+U	https://www.hydrocarbonprocessing.com
+DJ	hydrocarbonprocessing.com
+
+# Added per issue #3031
+T	American Family Physician
+U	https://www.aafp.org
+DJ	aafp.org
+
+# Added per issue #3161
+T	SRDS
+U	https://www.srds.com
+DJ	srds.com
+
+# Added as per issue #1994 on May 30, 2011
+T       Revista Iberoamericana
+U       https://revista-iberoamericana.pitt.edu
+DJ      revista-iberoamericana.pitt.edu
+
+# Added per issue #3169
+T	Ethnology
+U	https://ethnology.pitt.edu
+DJ	ethonology.pitt.edu
+
+# Added per issue #3180
+T	CAA Reviews
+U	http://www.caareviews.org
+DJ	caareviews.org
+
+# Added per issue #3185
+T	in education
+U	https://journals.uregina.ca/ineducation/
+DJ      journals.uregina.ca
+DJ	ineducation.ca
+
+# Disabled Oct29/2020; dead/duplicate link
+# Added per issue #3202
+T	Interdisciplinary Social Sciences
+U	https://cgscholar.com/bookstore/cgrn/268
+DJ	cgscholar.com/bookstore/cgrn/268
+
+# Added as per issue #1459 on September 20, 2010
+T       Interdisciplinary Social Sciences
+U       https://thesocialsciences.com
+DJ      thesocialsciences.com
+
+# Added per issue #3272
+T	Journal of Ethics in Mental Health
+U	https://www.jemh.ca
+DJ	jemh.ca
+
+# Added per issue #3283
+T	Geodiversitas
+U	https://sciencepress.mnhn.fr/en/periodiques/geodiversitas
+DJ	sciencepress.mnhn.fr
+DJ	geodiversitas.com
+
+# Added per issue #3307
+T	acelf
+U	https://www.acelf.ca/ressources/education_et_francophonie/
+DJ	acelf.ca
+
+# Added per issue #3384
+T	Société des Etudes Latines
+U	https://www.societedesetudeslatines.com
+DJ	societedesetudeslatines.com
+
+# Added per issue #3410
+T	Association of Research Libraries
+U	https://publications.arl.org
+DJ	arl.org
+
+# Added per issue #3432
+T	Journal of Pastoral Theology
+U	http://www.spt-jpt.org
+DJ	spt-jpt.org
+
+# No longer valid - Feb 17/2022
+# Added per issue #3453
+#T	National Reporter System
+#U	http://www.mlb.nb.ca
+#DJ	mlb.nb.ca
+
+# Added per issue #3498
+T	The Nation
+U	https://www.thenation.com
+DJ	thenation.com
+
+# Added per issue #3499
+T	The New Republic
+U	https://www.newrepublic.com
+DJ	newrepublic.com
+
+# Added per issue #3511
+T	National Review
+U	https://www.nationalreview.com
+DJ	nationalreview.com
+
+# Added per issue #3530
+T	STAO
+U	https://stao.ca
+DJ	stao.ca
+
+# Added per issue #3534
+T	Society for Chaos Theory
+U	https://www.societyforchaostheory.org
+DJ	societyforchaostheory.org
+
+# Added per issue #3580
+T	Reclaiming Children and Youth
+U	https://reclaimingjournal.com
+DJ	reclaimingjournal.com
+
+# Added per issue #3696
+T	NewStatesman
+U	https://www.newstatesman.com
+DJ	newstatesman.com
+
+# Added per issue #3699
+T	IFLA - Internation Federation of Library Associations and Institutions
+U	https://www.ifla.org/
+DJ	ifla.org
+
+# Added per issue #3708
+T	Brock Education Journal
+U	https://journals.library.brocku.ca/
+DJ	library.brocku.ca
+
+# No longer valid - Feb 17/2022
+# Added per issue #3716
+#T	Jordan Publishing
+#U	http://www.jordanpublishingcpd.co.uk
+#DJ	jordanpublishingcpd.co.uk
+
+# Added per issue #3725
+T	mathjournals.org
+U	http://www.mathjournals.org
+DJ	mathjournals.org
+
+# Added per issue #3738
+T	Opera News
+U	https://www.operanews.com
+DJ	operanews.com
+
+# Added per issue #3748
+T	Revista de Filologia Espanola
+U	https://xn--revistadefilologiaespaola-uoc.revistas.csic.es
+DJ	revistas.csic.es
+
+# Added per issue #3749
+T	Olschki
+U	https://www.olschki.it
+DJ	olschki.it
+
+# Added per issue #3759
+T	Times Higher Education
+U	https://www.timeshighereducation.com
+DJ	timeshighereducation.com
+DJ	timeshighereducation.co.uk
+
+# Added per issue #3804
+T	American Geosciences Institute
+U	https://www.americangeosciences.org/
+DJ	americangeosciences.org
+DJ	agiweb.org
+
+# Added per issue #3837
+T	Royal Archaeological Institute
+U	https://www.royalarchinst.org
+DJ	royalarchinst.org
+
+# Added per issue #3850
+T	Maps 101
+U	https://www.maps101.com
+DJ	maps101.com
+
+# Added per issue #3942
+T	World Oil Online
+U	https://www.worldoil.com
+DJ	worldoil.com
+
+# Added per issue #3941
+T	Water Environment Federation
+U	https://www.wef.org
+DJ	wef.org
+
+# Added per issue #3937
+T	Minerals and Metallurgical Processing
+U	https://www.smenet.org
+DJ	www.smenet.org
+
+# Added per issue #3954
+T	Français dans le Monde
+U	https://www.fdlm.org
+DJ	fdlm.org
+
+# Added per issue #3955
+T	Schoolart
+U	https://www.davisart.com
+DJ	davisart.com
+
+# Added per issue #4017
+T	Education Law Reporter, Elementary & Secondary Schools
+U	https://www.preventivelaw.ca
+DJ	preventivelaw.ca
+
+# Added per issue #4038
+T	National Council for the Social Studies
+U	https://www.socialstudies.org
+DJ	socialstudies.org
+
+# Added per issue #4039
+T	Medlantis
+U	https://www.medlantis.org
+DJ	www.medlantis.org
+
+# Added per issue #4049
+T	Canadian HR reporter
+U	https://www.hrreporter.com
+DJ	hrreporter.com
+
+# Added per issue #4062
+T	Stazione Zoologica
+U	https://www.hpls-szn.com
+DJ	hpls-szn.com
+
+# Added per issue #4087
+T	Journal of reproductive medicine
+U	https://www.reproductivemedicine.com/
+DJ	www.reproductivemedicine.com
+DJ	jreprodmed.com
+
+# Added per issue #4100
+T	ÖAW - Austrian Academy of Sciences
+U	https://www.austriaca.at
+DJ	austriaca.at
+
+# Added per issue #4108
+T	Executive Sciences Institute
+U	https://www.esipublications.com
+DJ	esipublications.com
+
+# Added per issue #4112
+T	Journal of Roman Archaeology
+U	https://journalofromanarchaeology.com
+DJ	journalofromanarchaeology.com
+DJ	journalofromanarch.com
+
+# Added per issue #4125
+T	Social Policy
+U	https://www.socialpolicy.org
+DJ	socialpolicy.org
+
+# Added per issue #4127
+# removed per issue #4255
+# Added per issue #4273
+T	curio.ca
+U	https://curio.ca
+DJ	curio.ca
+DJ	www.curio.ca
+
+# Added per issue #4138
+T	ULI Development Case Studies
+U	https://casestudies.uli.org
+DJ	uli.org
+
+# Added per issue #4250
+T	American Book Prices Current
+U	https://www.searchabpc.com
+DJ	searchabpc.com
+
+# Added per issue #4257
+T	Bates Visual Guide
+U	https://batesvisualguide.com
+HJ 	batesvisualguide.com
+HJ 	https://batesvisualguide.com
+DJ	batesvisualguide.com
+
+# Added per issue #4331
+T	Ibero-Amerikanisches Institut
+U	https://www.iai.spk-berlin.de
+DJ	iai.spk-berlin.de
+
+# Added per issue #4385 on Jan 30, 2014
+T	Canadian Journal of Community Mental Health
+U	https://www.cjcmh.com/page/loi/cjcmh
+DJ	cjcmh.com
+
+##--## Mergent Investor Edge
+##Mergent
+T Mergent Investor Edge
+URL https://www.mergentinvestoredge.com/
+DJ mergentinvestoredge.com
+
+# Added per issue #4494
+T	HRInsider
+U	https://www.hrinsider.ca
+DJ	hrinsider.ca
+
+# Added per issue #4552
+T	Canadian Lawyer Mag
+U	https://www.canadianlawyermag.com
+DJ	canadianlawyermag.com
+
+# Added per issue #4889
+T	Books in Print
+U	https://www.booksinprint.com
+DJ	booksinprint.com
+
+## Checked HERE
+
+# Added per issue #4594
+T	TLA Online
+U	http://www.tla-online.org
+DJ	tla-online.org
+
+# Added per issue #4779
+T	China Perspectives
+U	http://www.cefc.com.hk
+DJ	cefc.com.hk
+
+# Added per issue #4821
+T	ACSA Curriculum Perspectives
+U	http://www.acsa.edu.au
+DJ	acsa.edu.au
+
+# Added per issue #4843
+T	Fenimore Art Museum
+U	http://www.fenimoreartmuseum.org
+DJ	fenimoreartmuseum.org
+
+# Added per issue #4937
+T	OAPEN
+U	http://www.oapen.org
+DJ	oapen.org
+
+# Disabled Oct29/2020; dead/duplicate link
+# Added per issue #4965
+T	N Plus one
+U	https://nplusonemag.com
+DJ	nplusonemag.com
+
+# Added per issue #5056
+T	Digital Commons @ EMU
+U	http://commons.emich.edu
+DJ	commons.emich.edu
+
+# Added per issue #5075
+T	AIChE
+U	http://www.aiche.org
+DJ	www.aiche.org
+
+# To Check: redirects
+# Issue #5163
+T 	Ground Engineering
+U	http://www.nce.co.uk
+DJ	www.nce.co.uk
+
+# Issue #5182
+T 	Construction Boxscore Database
+U	http://www.constructionboxscore.com
+DJ	constructionboxscore.com
+
+# Issue #5235
+T 	Studi Musicali
+U	http://studimusicali.santacecilia.it
+DJ	santacecilia.it
+
+# Issue #5260
+T 	Canadian Journal of Environmental Education
+U	http://cjee.lakeheadu.ca
+DJ	lakeheadu.ca
+
+# Issue #5611 (20220930)
+T 	Access Science
+U 	https://www.accessscience.com
+HJ	accessscience.com
+HJ	http://accessscience.com
+HJ	www.accessscience.com
+HJ	https://idp.sams-sigma.com
+DJ	accessscience.com
+
+# Issue #5700
+T 	spnhc
+U	http://www.spnhc.org
+DJ	spnhc.org
+
+# Issue #5733
+T 	American Ceramic Society
+U	http://www.ceramics.org
+DJ	ceramics.org
+
+# Issue #5810
+T 	Journal of Sports Medicine and Physical Fitness
+U	http://www.minervamedica.it
+DJ	minervamedica.it
+
+# Issue #5835
+T 	philpapers
+U	http://philpapers.org/
+DJ	philpapers.org
+
+# Issue #5843
+T 	MultiBriefs
+U	http://www.multibriefs.com
+DJ	multibriefs.com
+
+# Issue #5927
+T 	for the learning of mathematics
+U	http://flm-journal.org
+DJ	flm-journal.org
+
+# Issue #5996
+T 	Better Cities and Towns
+U	http://bettercities.net
+DJ	bettercities.net
+
+
+# Issue #6102
+T 	APTI
+U	http://www.apti.org
+DJ	apti.org
+
+# Issue #6104
+T 	Ancient History Bulletin
+U	http://ancienthistorybulletin.org
+DJ	ancienthistorybulletin.org
+
+# Issue #6119
+T 	Music cataloguing bulletin
+U	http://www.musiclibraryassoc.org
+DJ	musiclibraryassoc.org
+
+# Issue #6118
+T 	Energy Studies Review
+U	https://energystudiesreview.ca
+DJ	energystudiesreview.ca
+
+# Issue #6129
+T 	Quadrant Online
+U	http://quadrant.org.au
+DJ	quadrant.org.au
+
+# Issue #6164
+T 	Clinical Kinesiology
+U	http://ejs.clinicalkinesiology.net
+DJ	clinicalkinesiology.net
+
+# Issue #6208
+T 	Pulp and Paper Canada
+U	http://www.pulpandpapercanada.com
+DJ	www.pulpandpapercanada.com
+
+# To Check: redirects
+# Issue 6301
+T	Arab World Geographer
+U	http://arabworldgeographer.org
+DJ	arabworldgeographer.org
+
+# Issue 6481
+T	Green Teacher
+U	http://greenteacher.com
+DJ	greenteacher.com
+
+# To Check: redirects
+# Issue 184447
+T	Infomart
+U	http://fpadvisor.infomart.com/login/ip/uqueen/
+DJ	infomart.com
+
+# Issue 184859
+T	American Real Estate Society
+U	http://aresjournals.org
+DJ	aresjournals.org
+
+##
+# Highwire Titles - complete list from Publisher
+# Updated Mon Jul 20 17:15:14 2009
+##
+#
+
+T  American Journal of Enology and Viticulture
+U  http://www.ajevonline.org 
+DJ ajevonline.org 
+
+T  American Societyof Neuroradiology & AJNR
+U  http://www.ajnr.org
+HJ ajnr.org
+HJ asnr.org
+HJ https://asnr.org
+HJ https://www.ajnr.org
+HJ https://www.asnr.org
+HJ neurographics.org
+HJ www.asnr.org
+HJ www.neurographics.org
+DJ ajnr.org
+DJ asnr.org
+DJ neurographics.org
+
+T  American Journal Of Pathology
+U  http://ajp.amjpathol.org 
+DJ amjpathol.org 
+
+# To Check: redirects
+T  American Journal of Public Health
+U  http://www.ajph.org 
+DJ ajph.org 
+
+T  American Journal of Roentgenology
+U  http://www.ajronline.org 
+DJ ajronline.org 
+
+T  Annals of Clinical & Laboratory Science
+U  http://www.annclinlabsci.org 
+DJ annclinlabsci.org 
+
+T  Annals of Family Medicine
+U  http://www.annfammed.org 
+DJ annfammed.org 
+
+# To Check: redirects
+T  Annals of Surgical Oncology
+U  http://www.annalssurgicaloncology.org 
+DJ annalssurgicaloncology.org 
+
+T  International Institute of Anticancer Research Journals
+U  https://iiarjournals.org 
+HJ  ar.iiarjournals.org 
+HJ  cgp.iiarjournals.org 
+HJ  iv.iiarjournals.org 
+DJ iiarjournals.org 
+
+# To Check: redirects
+T  CA: A Cancer Journal for Clinicians
+U  http://caonline.amcancersoc.org 
+DJ amcancersoc.org 
+
+T  Canadian Family Physician
+U  http://www.cfp.ca 
+DJ cfp.ca 
+
+T  Cleveland Clinic Journal of Medicine
+U  http://www.ccjm.org 
+DJ ccjm.org 
+
+T  Clinical Journal of the American Society of Nephrology
+U  https://cjasn.asnjournals.org 
+HJ cjasn.asmnjournals.org
+HJ jasn.asmnjournals.org
+DJ asnjournals.org 
+
+T  Clinical Medicine & Research
+U  http://www.clinmedres.org 
+DJ clinmedres.org 
+
+T  Genetics
+U  http://www.genetics.org 
+DJ genetics.org 
+
+T  Haematologica
+U  http://www.haematologica.org 
+DJ haematologica.org 
+
+# To Check: redirects
+T  Investigative Ophthalmology & Visual Science
+U  http://www.iovs.org 
+DJ iovs.org 
+
+T  Journals of the American College of Cardiology (JACC)
+U  https://jacc.org 
+DJ jacc.org 
+
+T  JAOA: Journal of the American Osteopathic Association
+U  http://www.jaoa.org 
+DJ jaoa.org 
+
+T  Journal of Biological Chemistry
+U  http://www.jbc.org 
+DJ jbc.org 
+
+# To Check: redirects
+T  Journal of Dental Education
+U  http://www.jdentaled.org 
+DJ jdentaled.org 
+
+T  Journal of Immunology
+U  http://www.jimmunol.org 
+DJ jimmunol.org 
+
+T  Journal of Lipid Research
+U  http://www.jlr.org 
+DJ jlr.org 
+
+T  Journal of Nuclear Medicine
+U  http://jnm.snmjournals.org 
+HJ jnm.snmjournals.org 
+HJ tech.snmjournals.org 
+DJ snmjournals.org 
+
+T  Journal of Soil and Water Conservation
+U  http://www.jswconline.org 
+DJ jswconline.org 
+
+# To Check: redirects
+T  Journal of the American Academy of Orthopaedic Surgeons
+U  http://www.jaaos.org 
+DJ jaaos.org 
+
+T  Journal of the American Academy of Psychiatry and the Law Online
+U  http://www.jaapl.org 
+DJ jaapl.org 
+
+T  Journal of the American Board of Family Medicine
+U  http://www.jabfm.org 
+DJ jabfm.org 
+
+# To Check: redirects
+T  Journal of the American College of Nutrition
+U  http://www.jacn.org 
+DJ jacn.org 
+
+T  Journal of the American Dental Association
+U  http://jada.ada.org 
+DJ ada.org 
+
+# To Check: redirects
+T  Mayo Clinic Proceedings
+U  http://www.mayoclinicproceedings.com 
+DJ mayoclinicproceedings.com 
+
+T  Molecular & Cellular Proteomics
+U  http://www.mcponline.org 
+DJ mcponline.org 
+
+# To Check: redirects
+T  Peritoneal Dialysis International
+U  http://www.pdiconnect.com 
+DJ pdiconnect.com 
+
+T  Plant Physiology
+U  http://www.plantphysiol.org 
+DJ plantphysiol.org 
+
+T  PNAS
+U  http://www.pnas.org 
+DJ pnas.org 
+
+T  Radiologic Technology
+U  http://www.radiologictechnology.org 
+DJ radiologictechnology.org 
+
+T  Studies in Mycology
+U  http://www.studiesinmycology.org 
+DJ studiesinmycology.org 
+
+##
+# end of Highwire list from Publisher
+##
+
+# Issue 30969
+T LERA for Libraries
+U http://lerachapters.org/OJS/ojs-2.4.4-1/index.php/PFL/index
+DJ lerachapters.org
+
+# Issue 187928
+T American Paleontology
+U http://www.museumoftheearth.org
+D museumoftheearth.org
+
+# To Check: redirects
+# Issue 188279
+T Canadian Occupational Health & Safety News
+U http://www.cohsn.com
+D cohsn.com
+
+# Issue 189744
+T Philosophy of Food
+U http://search.credoreference.com
+D credoreference.com
+
+# Issue 185023, changed in 191271
+T       Culture, Society & Masculinities
+U       http://www.mensstudies.info
+DJ      mensstudies.info
+
+T       English Historical Documents
+U       http://www.englishhistoricaldocuments.com
+DJ      englishhistoricaldocuments.com
+# Issue #195775
+
+T       Pioneer America Society Transactions
+U       http://www.pioneeramerica.org
+DJ      pioneeramerica.org
+
+# To Check: redirects
+# Added per Issue #200708
+T       the Society for Ethnomusicology
+U       http://ethnomusicology.site-ym.com
+DJ      site-ym.com
+
+# Added per Issue #200821
+T       Artforum International
+U       http://www.artforum.com
+DJ      artforum.com
+
+# Added per Issue #201027
+T       The Printing Historical Society
+U       http://printinghistoricalsociety.org.uk
+DJ      printinghistoricalsociety.org.uk
+
+# To Check: redirects
+# Added per Issue #201032
+T       AIC
+U       http://www.conservation-us.org
+DJ      www.conservation-us.org
+
+# Added per Issue #201309
+T       French17
+U       http://french17.unl.edu
+DJ      unl.edu
+
+# Added per Issue #201348
+T       Architectural Review
+U       http://www.architectural-review.com
+DJ      architectural-review.com
+
+# Added per Issue #201584
+T       Educational Leadership
+U       http://ascd.org
+DJ      ascd.org
+
+# Added per Issue #201887
+T       The Times Literary Supplement
+U       http://www.the-tls.co.uk
+DJ      the-tls.co.uk   
+
+# Added per Issue #204570, updated on 20240704
+T       Royal Astronomical Society of Canada
+U https://rasc.ca
+HJ http://rasc.ca
+DJ rasc.ca
+#U       http://rasc.ca
+
+# Added per Issue #206720
+T       Indiana University Mathematics Journal
+U       http://www.iumj.indiana.edu
+DJ      indiana.edu
+
+# added per issue 1325
+# Added per Issue #207165
+T       Paper of Record
+U       https://paperofrecord.hypernet.ca/search.asp
+DJ      paperofrecord.hypernet.ca
+HJ      hypernet.ca
+H       hypernet.ca
+
+# Added per Issue #208685
+T	Electronic Enlightenment
+U	http://www.e-enlightenment.com
+DJ	e-enlightenment.com
+
+# Added per Issue #209733
+T	Cambridge Structural Database
+U	http://www.ccdc.cam.ac.uk
+DJ	ccdc.cam.ac.uk
+
+# Added per Issue #213407
+T	Physical & Health Education Journal
+U	http://journal.phecanada.ca
+DJ	journal.phecanada.ca
+
+# Added per Issue 2481
+T	Museums Association
+U	http://www.museumsassociation.org
+DJ	museumsassociation.org
+
+# Added per Issue 3748
+T	Ontario Society for Environmental Education
+U	http://home.osee.ca
+DJ	home.osee.ca
+
+# Added per Issue # 7213
+T	Australian Literary Studies
+U	https://www.australianliterarystudies.com.au/archive
+DJ	australianliterarystudies.com.au
+
+# Added per Issue #8720
+T	Deslibris - Canadian Electronic Library
+U	http://deslibris.ca/en-us/landing.aspx
+DJ	deslibris.ca
+ 
+# Added per Issue 21982
+T	Make:	
+U	http://makezine.com
+DJ	makezine.com
+
+# Added per Issue #47000
+T	The American Society of Cinematographers
+U	https://theasc.com
+DJ	theasc.com
+
+# To Check: redirects
+# Added per Issue #48135
+T	Make: Digital
+U	http://www.make-digital.com
+DJ	www.make-digital.com
+
+# Added per Issue #48138
+T	Isabel Health Care
+U	https://www.isabelhealthcare.com
+DJ	www.isabelhealthcare.com
+
+# Added per Issue #52301
+T	The Journal of Contemplative Inquiry
+U	https://journal.contemplativeinquiry.org
+DJ	journal.contemplativeinquiry.org
+
+# Added per Issue #58091
+T	Notes from the Podium
+U	https://www.notesfromthepodium.co.uk
+DJ	www.notesfromthepodium.co.uk
+
+# Added per Issue #59105
+T	Reflections
+U	https://www.caslt.org/en/general-information/media-en/reflexions
+DJ	caslt.org
+
+# Added per Issue #67091; new updates for EastView Information Services added on 2024-04-01
+IncludeFile databases/eastview.txt
+#T	EastView Information Services
+#U	http://dlib.eastview.com
+#DJ	dlib.eastview.com
+
+
+T	The Index of Medieval Art
+U	https://theindex.princeton.edu
+DJ	theindex.princeton.edu
+
+# Added per Issue #76407
+T	Barreau du Quebec
+U	https://www.barreau.qc.ca/en
+DJ	barreau.qc.ca
+
+# Added per Issue #78966
+T	The New Zealand Journal of History
+U	http://www.nzjh.auckland.ac.nz
+DJ	nzjh.auckland.ac.nz
+
+# Added per Issue #76845
+T	Tradition - A Journal of Orthodox Jewish Thought
+U	https://www.traditiononline.org
+DJ	traditiononline.org
+
+# Added per Issue #87409
+T	Chemical Institute of Canada
+U	https://www.cheminst.ca
+DJ	cheminst.ca
+ 
+# Added per Issue #86694
+# Added as per issue #1518 on Oct 28, 2010
+T	School Library Journal
+U	https://www.slj.com
+DJ	www.slj.com
+DJ	slj.com
+DJ      schoollibraryjournal.com
+
+# Updated entry per issue #92636
+Title  China Data Online
+U      https://www.china-data-online.com/
+DJ     *.china-data-online.com
+
+# To Check: redirects
+# Added per Issue #97448
+# Added HTTPHeader per issue 129781
+T	Reprints Desk
+HTTPHeader X-GWT-*
+U	https://info.reprintsdesk.com
+##HJ	www.reprintsdesk.com
+HJ	www.reprintsdesk.com
+DJ	reprintsdesk.com
+##-## Feb27/2020 (Alex/Marco)
+#DJ	www.reprintsdesk.com
+
+# Added per Issue #99111
+T	Treatise Online
+U	https://journals.ku.edu/index.php/treatiseonline/issue/archive
+DJ	ku.edu
+
+# Added per Issue #89261
+T	IAREPORTER
+U	http://www.iareporter.com
+DJ	iareporter.com
+
+# Added per Issue #103807
+# Version 3.0 - Updated 2019-03-04
+Title O'Reilly Media
+HTTPHeader X-CSRFToken
+HTTPMethod PATCH
+HTTPMethod DELETE
+AllowVars u
+EBLSecret UOUlcZEICXSN0s4pTllJ5qXPL6021ANn
+URL https://www.oreilly.com/library/view/temporary-access/?email=^u<https://www.oreilly.com/library/view/temporary-access/?email=%5eu>
+HJ www.safaribooksonline.com
+HJ learning.oreilly.com
+DJ oreilly.com
+DJ safaribooksonline.com
+
+# Added per Issue #98807
+T	Convidence
+U	https://www.covidence.org/home
+DJ	covidence.org
+
+# Added per Issue #109031
+T	Skillport
+U	https://queensu.skillport.com
+DJ	skillport.com
+SSO -Secret=mzjkxhsh3yfrzr0xg5zdnedq -HASH=SHA256 -URL=https://queensu.skillport.com/skillportfe/ezproxy/ezproxy.action Skillport
+
+# Added per Issue #115161
+T	eCampus Ontario
+U	https://www.ecampusontario.ca
+DJ	ecampusontario.ca
+
+#
+# To Look At
+#
+
+# Added Apr30/2020 -- New Config: Wiley --
+#   -- citatation database which links to Wiley
+T	Wiley Interscience (non-journal)
+U	http://www.els.net
+DJ	els.net
+
+##
+## Canadian University Sites
+##
+
+# UToronto sites
+T	Lexicons of Early Modern English - UofT Press
+U	https://leme.library.utoronto.ca
+DJ	library.utoronto.ca
+
+# Added per issue #3284
+T	McMaster PLUS (Premium LiteratUre Service)
+U	https://hiru.mcmaster.ca
+HJ	macsphere.mcmaster.ca
+HJ	hiru.mcmaster.ca
+DJ	mcmaster.ca
+
+# Dalhousie
+# Issue #5798
+T 	Dalhousie University Libraries Journal Hosting Service
+U	http://ojs.library.dal.ca
+DJ	ojs.library.dal.ca
+
+##
+## Government sites -- verify if we still need these
+##
+
+# To Check: government site
+# Added as per issue #1636 on Jan 25, 2011
+T	Gov't of Alberta: Queen's Printer
+U	http://qpsource.gov.ab.ca/
+DJ	gov.ab.ca/
+
+# To Check: government site (redirect)
+T	Gov't of Newfoundland and Labrador: Finance
+U	http://www.fin.gov.nl.ca/fin/
+DJ	fin.gov.nl.ca
+
+T	Gov't of Canada: Fisheries and Oceans Canada
+U	https://www.dfo-mpo.gc.ca
+DJ	dfo-mpo.gc.ca
+
+T	Gov't of Canada: TERMIUM Plus
+U	http://www.termiumplus.gc.ca
+DJ	termiumplus.gc.ca
+
+T	Gov't of Canada: Depository Services Program
+U	http://dsp-psd.pwgsc.gc.ca
+DJ	pwgsc.gc.ca
+
+T	Gov't of Canada: StatsCan
+U	http://www.statcan.ca
+DJ	statcan.ca
+
+T	Gov't of Canada: Library and Archives Canada Electronic Collection
+U	http://epe.lac-bac.gc.ca
+DJ	lac-bac.gc.ca
+
+T	Gov't of Canada: Agriculture and Agri-Food Canada
+U	http://www.agr.gc.ca/
+DJ	agr.gc.ca
+
+T	Gov't of Canada: Natural Sciences and Engineering Research Council of Canada
+U	http://www.nserc-crsng.gc.ca/
+DJ	nserc-crsng.gc.ca
+DJ	nserc.ca
+DJ	nserc.gc.ca
+
+T	Gov't of Canada: National Research Council Canada
+U	http://www.nrc.ca
+DJ	nrc.ca
+
+##
+## Redirects to new hosts -- verify if we need to keep these
+##
+
+## Pointer page to Wiley Online
+T	RD - Pharmacotherapy
+U	http://www.pharmacotherapy.org
+DJ	pharmacotherapy.org
+
+## Pointer page to De Gruyter
+T	RD - Verlag der Zeitschrift für Naturforschung
+U	http://www.znaturforsch.com
+DJ	znaturforsch.com
+
+## Redirect to Wiley Online
+T	RD - FASEB Journal
+U	http://www.fasebj.org 
+DJ	fasebj.org 
+
+## Redirect to Wiley Online
+T	RD - Experimental Physiology
+U	http://ep.physoc.org 
+DJ	physoc.org 
+
+## Redirect to Wiley Online
+T	RD - Oncologist
+U	http://theoncologist.alphamedpress.org 
+DJ	theoncologist.alphamedpress.org 
+
+## Redirect to Wiley Online
+T	RD - Stem Cells
+U	http://stemcells.alphamedpress.org 
+DJ	stemcells.alphamedpress.org 
+
+## Redirect to Wiley Online
+T	RD - British Journal of Pharmacology
+U	http://www.brjpharmacol.org/
+DJ	brjpharmacol.org
+
+## Redirect to Wiley Online
+T	RD - Allen Press Miscellaneous
+U	http://www.setacjournals.org
+DJ	setacjournals.org
+
+## Redirect to BioMed Central
+T	RD - Journal of Molecular Signaling
+U	https://www.jmolecularsignaling.com/
+DJ	jmolecularsignaling.com
+
+## Redirect to BioMed Central
+T	RD - New Science Press
+U	https://www.new-science-press.com
+DJ	new-science-press.com
+
+## Redirect to BioMed Central
+T	RD - Substance Abuse Treatment, Prevention, and Policy
+U	http://www.substanceabusepolicy.com/
+DJ	substanceabusepolicy.com
+
+## Redirect to Lippincott (LWW) aka Wolters Kluwer Health
+# Added to make linking work in PubMed
+T	RD - American Therapeutics
+U	http://www.americantherapeutics.com
+DJ	americantherapeutics.com
+
+## Redirect to Lippincott (LWW) aka Wolters Kluwer Health
+T	RD - Obstetrical & Gynecological Survey
+U	http://www.obgynsurvey.com/
+DJ	obgynsurvey.com
+
+## Redirect to Clarivate
+# Added to allow JCRWEB to work within CBCA
+T	RD - JCRWEB
+U	http://jcrweb.com
+DJ	jcrweb.com
+
+## Redirect to Lippincott (LWW) aka Wolters Kluwer Health
+# Added to make linking work in OVID
+T	RD - Neuroreport
+U	http://www.neuroreport.com
+DJ	neuroreport.com
+DJ	lwwonline.com
+
+## Redirect to IOP
+T	RD - Electrochemical Society Digital Library
+U	http://ecsdl.org/ 
+DJ	ecsdl.org
+
+## Redirect to BMJ
+T	RD - Drug and Therapeutics Bulletin (DTB)
+U	https://www.dtb.org.uk/dtb/do/home
+DJ	www.dtb.org.uk
+
+## Redirect to CSH Press
+T	RD - Learning Memory
+U	http://www.learnmem.org
+DJ	learnmem.org
+
+## Redirect to SpringerLink
+T	RD - Kindlers Literatur Lexikon
+U	http://www.kll-online.de/
+DJ	kll-online.de
+DJ	cedion.de
+
+## Redirect to UToronto
+T	RD - Canadian Book Review Annual Online
+U	https://cbra.library.utoronto.ca/
+HJ	library.utoronto.ca
+DJ	utoronto.ca
+
+## Redirect to McMaster
+# Issue #6229
+T 	RD - McMaster University's Bertrand Russell Research Centre
+U	https://escarpmentpress.org/russelljournal
+DJ	escarpmentpress.org
+
+## Redirect to Allen Press
+# Added per issue #3099
+T	RD - Journal of Graduate Medical Education
+U	http://www.jgme.org
+DJ	jgme.org
+
+## Redirect to Allen Press
+# Added per issue #3533
+T	RD - Corrosion
+U	http://corrosionjournal.org
+DJ	corrosionjournal.org
+
+#
+# ---- START NEW CONFIG ----
+#
+
+# Added Apr29/2020 -- New Config: O'Briens --
+IncludeFile databases/obriensinternet.txt
+
+# Added Apr29/2020 -- New Config: Bloomsbury Digital --
+IncludeFile databases/bloomsburydigitalresources.txt
+
+# Added Apr29/2020 -- New Config: Factiva --
+IncludeFile databases/factiva.txt
+
+# Added Apr30/2020 -- New Config: CrossRef --
+IncludeFile databases/crossref.txt
+
+# Added Apr30/2020 -- New Config: IEEE --
+IncludeFile databases/ieeedigitallibrary.txt
+
+# Added Apr30/2020 -- New Config: UC Press --
+IncludeFile databases/ucpress.txt
+
+# Added Mar8/2023 -- New Config: Clarivate Authentication
+IncludeFile databases/clarivate_auth.txt 
+
+# Added Apr30/2020 -- New Config: Web of Knowledge --
+IncludeFile databases/webofknowledge.txt
+
+# Added July13/2023
+IncludeFile databases/meridian.txt
+
+# Added Sept5/2023
+IncludeFile databases/artjournal.txt
+
+#-----TO comment out above------
+
+# Added Apr30/2020 -- New Config: PubMed --
+IncludeFile databases/pubmed.txt
+
+# Added Apr30/2020 -- New Config: BioMed Central --
+# Added Jul13/2020 -- New Config: BioMed Central --
+IncludeFile databases/biomedcentral.txt
+
+# Added Apr30/2020 -- New Config: Chadwyck --
+IncludeFile databases/chadwyck.txt
+
+# Added Apr30/2020 -- New Config: ASTM --
+IncludeFile databases/astm.txt
+
+# Added Apr30/2020 -- New Config: SpringerLink --
+IncludeFile databases/springerlink.txt
+
+# Added Apr30/2020 -- New Config: Annual Reviews --
+IncludeFile databases/annualreviews.txt
+
+# Added May04/2020 -- New Config: University of Toronto --
+IncludeFile databases/utoronto-chass.txt
+
+# Added May04/2020 -- New Config: Human Kinetics  --
+IncludeFile databases/human_kinetics.txt
+
+# Added May07/2020 -- New Config: AMA Manual, ITrack 146155 --
+#IncludeFile databases/ama_manual.txt
+
+# Added May25/2020 -- New Config: EBSCOhost --
+# --> NOTE: must preceed ebscoejs.txt; just move these two stanzas down if one gets updated
+IncludeFile databases/ebscohost.txt
+
+# Added May25/2020 -- New Config: EBSCOejs --
+# --> NOTE: must follow ebscohost.txt; just move these two stanzas down if one gets updated
+IncludeFile databases/ebscoejs.txt
+
+# Added May25/2020 -- New Config: American College of Physicians --
+IncludeFile databases/acponline.txt
+
+# Added Jun09/2020 -- New Config: American Meteorological Society --
+##IncludeFile databases/ametsoc.txt
+IncludeFile databases/americanmeteorologicalsociety.txt
+
+# Added Jun09/2020 -- New Config: Criterion --
+##IncludeFile databases/criterion.txt
+IncludeFile databases/criterionondemand.txt
+
+# Added Jun22/2020 -- New Config: Philosophy Documentation Center --
+IncludeFile databases/pdcc.txt
+
+# Added Apr30/2020 -- New Config: Wiley --
+# --> NOTE: must preceed cochrane.txt; just move these two stanzas down if one gets updated
+IncludeFile databases/wileyonlinelibrary.txt
+
+# Added Jun29/2020 -- New Config: Cochrane --
+# --> NOTE: must follow wileyonlinelibrary.txt; just move these two stanzas down if one gets updated
+IncludeFile databases/cochrane.txt
+
+# Added Jul28/2020 -- New Config: Thieme MedOne --
+# --> NOTE: must preceed thiemeconnect.txt; just move these two stanzas down if one gets updated
+IncludeFile databases/thiememedone.txt
+
+# Added Jun30/2020 -- New Config: Thieme Connect --
+# --> NOTE: must follow thiememedone.txt; just move these two stanzas down if one gets updated
+IncludeFile databases/thiemeconnect.txt
+
+# Added Feb17/2022 -- New Config: Cookielaw --
+# --> NOTE: must be near thiemeconnect.txt and thiememedone.txt
+IncludeFile databases/cookielaw.txt
+
+# Added Jul10/2020 -- New Config: SAE International --
+IncludeFile databases/saeinternational.txt
+#
+# Added Jul10/2020 -- New Config: Library of Congress --
+IncludeFile databases/loc.txt
+
+# Added Jul10/2020 -- New Config: Choice Reviews --
+IncludeFile databases/choicereviews.txt
+
+# Added Jul13/2020 -- New Config: AACN Journals --
+IncludeFile databases/aacnjournals.txt
+
+# Added Jul13/2020 -- New Config: Akademiai Kiado --
+IncludeFile databases/akjournals.txt
+
+# Added Jul13/2020 -- New Config: Blake Quarterly --
+IncludeFile databases/blake.txt
+
+# Added Jul13/2020 -- New Config: Peeters Publishers --
+IncludeFile databases/peeters.txt
+
+# Added Jul13/2020 -- New Config: MathSciNet --
+IncludeFile databases/mathscinet.txt
+
+# Added Jul13/2020 -- New Config: AnthroSource --
+IncludeFile databases/anthrosource.txt
+
+# Added Jul13/2020 -- New Config: CIAO --
+IncludeFile databases/ciao.txt
+
+# Added Jul15/2020 -- New Config: Oxford Art Online --
+# --> NOTE: requires the oxfordreference.txt stanza; order important?? don't think so, check order
+# --> NOTE: must follow oxfordreference.txt; just move these two stanzas down if one gets updated ????
+IncludeFile databases/oxfordartonline.txt
+
+# Added Jul15/2020 -- New Config: Oxford Reference --
+# --> NOTE: need by oxfordartonline.txt stanza; just move these two stanzas down if one gets updated ????
+# --> NOTE: must preceed oxfordartonline.txt; just move these two stanzas down if one gets updated ????
+IncludeFile databases/oxfordreference.txt
+
+# Added Jul15/2020; see below -- New Config: ACM Digital Library --
+IncludeFile databases/acm.txt
+
+# Disabled Jul15/2020; see below -- New Config: Scitation --
+# Disabled Feb11/2021; see below -- New Config: Scitation --
+# - other similar sites like link.aip.org???
+IncludeFile databases/scitation.txt
+
+# Added Jul15/2020 -- New Config: BrillOnline --
+IncludeFile databases/brillonline.txt
+
+# Added Jul15/2020 -- New Config: Institute of Physics --
+IncludeFile databases/iop.txt
+
+# Added Jul15/2020 -- New Config: Iter Gateway to the Middles Ages and Renaissance --
+IncludeFile databases/iter.txt
+
+# Added Jul16/2020 -- New Config: Cambridge Core --
+IncludeFile databases/cambridgecore.txt
+
+# Added Jul16/2020 -- New Config: Royal Society of Chemistry / Chemistry World --
+IncludeFile databases/royal_society_chemistry.txt
+ 
+# Added Jul16/2020 -- New Config: InteLex Past Masters --
+# Added Oct08/2020 -- New Config: InteLex Past Masters --
+IncludeFile databases/nlxpm.txt
+
+# Added Jul16/2020 -- New Config: IEEE Xplore --
+IncludeFile databases/ieee.txt
+
+# Added Jul16/2020 -- New Config: GeoScienceWorld --
+IncludeFile databases/geoscienceworld.txt
+
+# Added Jul17/2020 -- New Config: PressReader --
+IncludeFile databases/pressreader.txt
+
+# Added Jul21/2020 -- New Config: AHA Journals --
+IncludeFile databases/ahajournals.txt
+
+# Added Jul21/2020 -- New Config: Kluwer Law --
+IncludeFile databases/kluwerlaw.txt
+
+# Added Jul21/2020 -- New Config: Informit Search --
+IncludeFile databases/informit.txt
+
+# Added Jul21/2020 -- New Config: Economic and Political Weekly --
+IncludeFile databases/epw.txt
+
+# Added Jul21/2020 -- New Config: J-STAGE --
+IncludeFile databases/jstage.txt
+
+# Added Jul21/2020 -- New Config: Alexander Street Press --
+IncludeFile databases/alexanderstreetpress.txt
+
+# Added Jun06/2024 -- New Config: Alexander Street Press Marc Records --
+IncludeFile databases/alexanderstreetmarc.txt
+
+# Added Jul22/2020 -- New Config: Portland Press Limited --
+IncludeFile databases/portlandpress.txt
+
+# Added Jul22/2020 -- New Config: Asia-Studies --
+IncludeFile databases/asiastudies.txt
+
+# Added Jul22/2020 -- New Config: Project Muse --
+IncludeFile databases/projectmuse.txt
+
+# Added Jul22/2020 -- New Config: History Cooperative Journals --
+IncludeFile databases/historycooperative.txt
+
+# Added Jul23/2020 -- New Config: Passport (Euromonitor International) --
+IncludeFile databases/gmid.txt
+
+# Added Jul23/2020 -- New Config: Journal of Wildlife Diseases --
+IncludeFile databases/wilddiseases.txt
+
+# Added Jul23/2020 -- New Config: American Physiological Society --
+IncludeFile databases/physiology.txt
+
+# Added Jul23/2020 -- New Config: University of Illinois Press --
+IncludeFile databases/uillinoispress.txt
+
+# Added Jul23/2020 -- New Config: Birds of the World --
+IncludeFile databases/birdsna.txt
+
+# Added Jul23/2020 -- New Config: MERIP --
+IncludeFile databases/merip.txt
+
+# Added Jul23/2020 -- New Config: Tumblebooks --
+IncludeFile databases/tumblebooks.txt
+
+# Added Jul24/2020 -- New Config: American Marketing Association --
+IncludeFile databases/ama.txt
+
+# Added Jul24/2020 -- New Config: Karger Publishers --
+IncludeFile databases/karger.txt
+
+# Added Jul28/2020 -- New Config: Ovid --
+IncludeFile databases/ovid.txt
+
+# Added Jul28/2020 -- New Config: Adam Matthew Digital --
+IncludeFile databases/amdigital.txt
+
+# Added Jul28/2020 -- New Config: ARTstor Digital Library --
+IncludeFile databases/artstor.txt
+
+# Added Jul28/2020 -- New Config: American Society of Civil Engineers --
+IncludeFile databases/asce.txt
+
+# Added Jul28/2020 -- New Config: Diabetes Journals --
+IncludeFile databases/diabetesjournals.txt
+
+# Added Jul29/2020 -- New Config: Taylor Francis eBooks --
+IncludeFile databases/tandfebooks.txt
+
+# Added Jul29/2020 -- New Config: Oxford Research Encyclopedia - Including Encyclopedia of Social Work --
+IncludeFile databases/oxfordre.txt
+
+# Added Jul30/2020 -- New Config: HighWire Press --
+IncludeFile databases/highwirepress.txt
+
+# Added Jul30/2020 -- New Config: APS Journals --
+IncludeFile databases/aps_journals.txt
+
+# Added Jul30/2020 -- New Config: American Academy of Pediatrics --
+IncludeFile databases/pediatrics.txt
+
+# Added Jul31/2020 -- New Config: Elgaronline --
+IncludeFile databases/elgaronline.txt
+
+# Added Jul31/2020 -- New Config: Docuseek2 --
+IncludeFile databases/docuseek2.txt
+
+# Added Jul31/2020 -- New Config: Equinox Publishing Ltd. --
+IncludeFile databases/equinox.txt
+
+# Added Jul31/2020 -- New Config: The Royal Society Publishing --
+IncludeFile databases/royalsocietypublishing.txt
+
+# Added Aug04/2020 -- New Config: Springer Nature Experiments --
+IncludeFile databases/springerprotocols.txt
+
+# Added Aug04/2020 -- New Config: De Gruyter --
+IncludeFile databases/degruyter.txt
+
+# Added Aug04/2020 -- New Config: University Press Scholarship Online --
+IncludeFile databases/universitypressscholarship.txt
+
+# Added Aug04/2020 -- New Config: INGENTAconnect --
+IncludeFile databases/ingentaconnect.txt
+
+# Added Aug06/2020 -- New Config: Kluwer Arbitration --
+IncludeFile databases/kluwerarbitration.txt
+
+# Added Feb02/2022 -- New Config: EIVillage --
+# Must precede sciencedirect stanza
+IncludeFile databases/engineering_village.txt
+
+# Added Aug06/2020 -- New Config: ScienceDirect --
+IncludeFile databases/sciencedirect.txt
+
+# Added Aug06/2020 -- New Config: Hispanic American Periodicals Index (HAPI) --
+IncludeFile databases/hapi.txt
+
+# Added Aug06/2020 -- New Config: University of Toronto Press Journals --
+IncludeFile databases/utorontopress.txt
+
+# Added Aug06/2020 -- New Config: Cabells Directories --
+IncludeFile databases/cabells.txt
+
+# Added Aug06/2020 -- New Config: SciFinder --
+IncludeFile databases/scifinder.txt
+
+# Added Aug06/2020 -- New Config: Dalloz --
+IncludeFile databases/dalloz.txt
+
+# Added Aug11/2020 -- New Config: Now Publishers --
+IncludeFile databases/nowpublishers.txt
+
+# Added Aug11/2020 -- New Config: Journal on Excellence in College Teaching --
+IncludeFile databases/journal_on_excellence_in_college_teaching.txt
+
+# Added Aug11/2020 -- New Config: The Journal of Bone & Joint Surgery --
+IncludeFile databases/jbjs.txt
+
+# Added Aug11/2020 -- New Config: Torrossa Casalini Full Text Platform --
+IncludeFile databases/torrossa.txt
+
+# Added Aug11/2020 -- New Config: Begell House, Inc --
+IncludeFile databases/begellhouse.txt
+
+# Added Aug11/2020 -- New Config: Journal Of Neurosurgery --
+IncludeFile databases/journal_of_neurosurgery.txt
+
+# Added Aug11/2020 -- New Config: CABI Resources --
+IncludeFile databases/cabiresources.txt
+
+# Added Aug11/2020 -- New Config: Oxford Bibliographies --
+IncludeFile databases/oxfordbibliographies.txt
+
+# Added Aug11/2020 -- New Config: American Economic Association --
+IncludeFile databases/aea.txt
+
+# Added Aug11/2020 -- New Config: McGraw-Hill Medical --
+IncludeFile databases/mhmedical.txt
+
+# Added Aug13/2020 -- New Config: American Speech-Language-Hearing Association (ASHA) --
+IncludeFile databases/asha.txt
+
+# Added Aug13/2020 -- New Config: CNKI --
+IncludeFile databases/cnki.txt
+
+# Added Aug13/2020 -- New Config: IMF eLibrary Statistics --
+IncludeFile databases/imf.txt
+
+# Added Aug13/2020 -- New Config: Telos --
+IncludeFile databases/telospress.txt
+
+# Added Aug13/2020 -- New Config: Structural Engineer --
+IncludeFile databases/istructe.txt
+
+# Added Aug13/2020 -- New Config: Sociological Research Online --
+IncludeFile databases/socresonline.txt
+
+# Added Aug13/2020 -- New Config: Journal of the American Animal Hospital Association --
+IncludeFile databases/jaaha.txt
+
+# Added Aug13/2020 -- New Config: Association of Teachers of Mathematics --
+IncludeFile databases/atm.txt
+
+# Added Aug13/2020 -- New Config: College Publishing --
+IncludeFile databases/collegepublishing.txt
+
+# Added Aug13/2020 -- New Config: BMJ Journals --
+IncludeFile databases/bmjJournals.txt
+
+# Added Aug13/2020 -- New Config: Sage Journals --
+IncludeFile databases/sagepub.txt
+
+# Added Aug13/2020 -- New Config: Berghahn Books --
+IncludeFile databases/berghahnjournals.txt
+
+# Added Aug13/2020 -- New Config: Practical Action Publishing --
+IncludeFile databases/practical-action-publishing.txt
+
+# Added Aug14/2020 -- New Config: IWA Publishing --
+IncludeFile databases/iwapublishing.txt
+
+# Added Aug14/2020 -- New Config: Canadian Mathematical Society --
+IncludeFile databases/cms.txt
+
+# Added Aug14/2020 -- New Config: American Concrete Institute --
+IncludeFile databases/concrete.txt
+
+# Added Aug14/2020 -- New Config: IBISWorld --
+IncludeFile databases/ibisworld.txt
+
+# Added Aug14/2020 -- New Config: Psychotherapy.net --
+IncludeFile databases/psychotherapy.txt
+
+# Added Aug14/2020 -- New Config: Physical Society of Japan --
+IncludeFile databases/jpsjournals.txt
+
+# Added Aug14/2020 -- New Config: American Association for Cancer Research --
+IncludeFile databases/aacrjournals.txt
+
+# Added Aug14/2020 -- New Config: Inderscience Online --
+IncludeFile databases/inderscience.txt
+
+# Added Aug14/2020 -- New Config: Mergent Bond Viewer --
+IncludeFile databases/mergentbondviewer.txt
+
+# Added Sep21/2020 -- New Config: Mergent Online --
+IncludeFile databases/mergentonline.txt
+
+# Added Oct08/2020 -- New Config: Mergent MDDI --
+IncludeFile databases/mergentmddi.txt
+
+# Added Feb17/2022 -- New Config: Mergent Archives --
+IncludeFile databases/mergentarchives.txt
+
+# Added Feb17/2022 -- New Config: Mergent Key Business Ratios --
+IncludeFile databases/mergentkbr.txt
+
+# Added Feb17/2022 -- New Config: Mergent Intellect --
+IncludeFile databases/mergentintellect.txt
+
+# Added Aug14/2020 -- New Config: The Journal of Neuroscience --
+IncludeFile databases/the_journal_of_neuroscience.txt
+
+# Added Aug25/2020 -- New Config: Oxford Journals --
+IncludeFile databases/oxfordjournals.txt
+
+# Added Aug28/2020 -- New Config: Oxford Scholarly Editions Online --
+IncludeFile databases/oxfordscholarlyeditions.txt
+
+# Added Sep02/2020 -- New Config: Duke University Press Books and Journals --
+IncludeFile databases/dukepress.txt
+
+# Added Sep02/2020 -- New Config: Oxford Music Online --
+IncludeFile databases/oxfordmusiconline.txt
+
+# Added Sep02/2020 -- New Config: Oxford Dictionary of National Biography --
+IncludeFile databases/oxforddnb.txt
+
+# Added Sep02/2020 -- New Config: Oxford English Dictionary (OED) --
+IncludeFile databases/oed.txt
+
+# Added Sep02/2020 -- New Config: Oxford Handbooks Online --
+IncludeFile databases/oxfordhandbooks.txt
+
+# Added Sep02/2020 -- New Config: Oxford Language Dictionaries Online --
+IncludeFile databases/oxford_language_dictionaries.txt
+
+# Added Sep02/2020 -- New Config: Oxford University Press Law --
+IncludeFile databases/ouplaw.txt
+
+# Added Sep02/2020 -- New Config: ICE Learning Center --
+IncludeFile databases/icelearningcenter.txt
+
+# Added Sep03/2020 -- New Config: Access Engineering --
+IncludeFile databases/accessengineering.txt
+
+# Added Sep08/2020 -- New Config: Inter-Research Science Publisher --
+IncludeFile databases/inter-research_science_publisher.txt
+
+# Added Sep08/2020 -- New Config: IGI Global --
+IncludeFile databases/igi_global.txt
+
+# Added Sep08/2020 -- New Config: Online Music Anthology --
+IncludeFile databases/onlinemusicanthology.txt
+
+# Added Sep08/2020 -- New Config: Medical Journals --
+IncludeFile databases/medicaljournals.txt
+
+# Added Sep08/2020 -- New Config: American Phytopathological Society --
+IncludeFile databases/americanphytopathologicalsociety.txt
+
+# Added Sep08/2020 -- New Config: Liverpool University Press --
+IncludeFile databases/liverpoolunipress.txt
+
+# Added Sep08/2020 -- New Config: Current History --
+IncludeFile databases/currenthistory.txt
+
+# Added Sep08/2020 -- New Config: Philosophy Now --
+IncludeFile databases/philosophynow.txt
+
+# Added Sep08/2020 -- New Config: BioOne Complete --
+IncludeFile databases/bioone.txt
+
+# Added Sep08/2020 -- New Config: World Shakespeare Bibliography --
+IncludeFile databases/world_shakespeare.txt
+
+# Added Sep08/2020 -- New Config: Wharton Research Data Services (WRDS) --
+IncludeFile databases/wrds.txt
+
+# Added Sep08/2020 -- New Config: JAMA Network --
+IncludeFile databases/jama_network.txt
+
+# Added Sep08/2020 -- New Config: World Bank eLibrary --
+IncludeFile databases/worldbankelibrary.txt
+
+# Added Sep08/2020 -- New Config: Encyclopedia of Astronomy and Astrophysics - EAA (ebooks) --
+IncludeFile databases/crcpress.txt
+
+# Added Sep08/2020 -- New Config: HeinOnline --
+IncludeFile databases/heinonline.txt
+
+# Added Sep08/2020 -- New Config: OECD iLibrary --
+IncludeFile databases/oecdilibrary.txt
+
+# Added Sep08/2020 -- New Config: University of Chicago Press Journals --
+IncludeFile databases/uchicago.txt
+
+# Added Sep08/2020 -- New Config: Nexis Uni --
+IncludeFile databases/nexisuni.txt
+
+# Added Sep14/2020 -- New Config: Taylor & Francis --
+IncludeFile databases/taylor_francis_online.txt
+
+# Added Sep14/2020 -- New Config: Micromedex --
+IncludeFile databases/micromedex.txt
+
+# Added Sep14/2020 -- New Config: MIT Press Journals --
+IncludeFile databases/mit_press_journals.txt
+
+# Added Sep14/2020 -- New Config: Newsbank/Readex Databases --
+IncludeFile databases/newsbank.txt
+
+# Added Sep14/2020 -- New Config: JHU Guide to Literary Theory and Criticism --
+IncludeFile databases/jhu.txt
+
+# Added Sep14/2020 -- New Config: EIU Portal --
+IncludeFile databases/eiu.txt
+
+# Added Sep14/2020 -- New Config: World Scientific Publishing --
+IncludeFile databases/worldscientific.txt
+
+# Added Sep14/2020 -- New Config: American Journal of Science --
+IncludeFile databases/ajsonline.txt
+ 
+# Added Sep14/2020 -- New Config: JSTOR --
+IncludeFile databases/jstor.txt
+
+# Added Sep14/2020 -- New Config: APA PsycNET --
+IncludeFile databases/apa_psycnet.txt
+
+# Added Sep14/2020 -- New Config: EndNote online and InCites --
+IncludeFile databases/endnoteandincites.txt
+
+# Added Sep17/2020 -- New Config: Eight Centuries --
+IncludeFile databases/paratext.txt
+
+# Added Sep18/2020 -- New Config: canadiana.org --
+IncludeFile databases.custom/canadiana.txt
+
+# Added Sep18/2020 -- New Config: CPA Canada --
+##IncludeFile databases/cpacanada.txt
+IncludeFile databases/knotia.txt
+
+# Added Sep18/2020 -- New Config: Cell Press
+IncludeFile databases/cellpress.txt
+
+# Added Sep21/2020 -- New Config: EDP Sciences --
+IncludeFile databases.custom/edpsciences.txt
+
+# Added Sep21/2020 -- New Config: GSA Journals (Allen Press) --
+IncludeFile databases.custom/gsajournals.txt
+
+# Added Sep21/2020 -- New Config: Gutenberg-e --
+IncludeFile databases.custom/gutenberg-e.txt
+
+# Added Sep21/2020 -- New Config: University of Michigan Digital Library Production Service --
+IncludeFile databases.custom/umich-edu.txt
+
+# Added Sep21/2020 -- New Config: The Literary Encyclopedia --
+IncludeFile databases/litencyc.txt
+
+# Added Sep21/2020 -- New Config: Longwoods Publishing --
+##IncludeFile databases.custom/longwoods.txt
+IncludeFile databases/longwoods.txt
+
+# Added Sep21/2020 -- New Config: Morgan & Claypool Publishers --
+IncludeFile databases.custom/morganclaypool.txt
+
+# Added Sep21/2020 -- New Config: Therapeutic Research Faculty --
+IncludeFile databases/naturalmedicines.txt
+
+# Added Sep21/2020 -- New Config: Nature Publishing --
+IncludeFile databases/nature_publishing_group.txt
+
+# Added Sep21/2020 -- New Config: Journal of Clinical Psychiatry --
+IncludeFile databases/psychiatrist.txt
+
+# Added Sep21/2020 -- New Config: CSIRO Publishing --
+IncludeFile databases/csiro.txt
+
+# Added Sep21/2020 -- New Config: Quintessence Publishing --
+IncludeFile databases/quintpub.txt
+
+# Added Sep22/2020 -- New Config: African Journals (Sabinet ePublications) --
+IncludeFile databases/sabinetepubs.txt
+
+# Added July20/2023 -- New Config: Sabinet Discover 
+IncludeFile  databases/sabinetref.txt
+
+# Keep old as custom for now
+#IncludeFile databases.custom/sabinet.txt
+
+# Added Sep22/2020 -- New Config: Elsevier eLibrary Germany --
+IncludeFile databases.custom/elibraryde.txt
+
+# Added Sep23/2020 -- New Config: ProQuest --
+IncludeFile databases/proquest.txt
+
+# Added Sep29/2020 -- New Config: Ulrichsweb --
+IncludeFile databases/ulrichsweb.txt
+
+# Added Sep29/2020 -- New Config: WorldTradeLaw.net --
+IncludeFile databases/worldtradelaw.txt
+
+# Added Sep29/2020 -- New Config: Women Writers Project --
+IncludeFile databases.custom/women_writers_project.txt
+
+# Added Sep29/2020 -- New Config: Elsevier Health Journals --
+IncludeFile databases/elsevierhealth.txt
+
+# Added Sep29/2020 -- New Config: Gale/Infotrac/PowerSearch Databases --Gale Products
+IncludeFile databases/gale.txt
+
+# Added Sep29/2020 -- New Config: Google Scholar --
+IncludeFile databases/googlescholar.txt
+
+# Added Sep29/2020 -- New Config: Scholars Portal --
+IncludeFile databases.custom/scholarsportal.txt
+
+# Added Sep29/2020 -- New Config: Turpion Ltd. --
+IncludeFile databases.custom/turpion.txt
+
+# Added Sep29/2020 -- New Config: Journal of Studies on Alcohol and Drugs --
+IncludeFile databases.custom/jsad.txt
+
+# Added Sep29/2020 -- New Config: ODESI --
+IncludeFile databases/odesi.txt
+IncludeFile databases.custom/odesi.txt
+
+# Added Sep30/2020 -- New Config: York U Journals --
+IncludeFile databases.custom/yorku.txt
+
+# Added Sep30/2020 -- New Config: Journal of the Motherhood Initiative --
+IncludeFile databases/jmi.txt
+
+# Disabled Sep30/2020; see below -- New Config: Vital Source Business Center --
+##IncludeFile databases.custom/vitalsource.txt
+# Disabled Sep17/2021; re-enabled on Sep9/2024
+IncludeFile databases/vitalsource.txt
+
+# Added Oct05/2020 -- New Config: University of Wisconsin Press --
+IncludeFile databases/uwpress.txt
+
+# Added Oct08/2020 -- New Config: Westlaw --
+##IncludeFile databases/westlaw.txt
+
+# CHEK ISSUE - TRY ORDER PRECEDENCE
+# Added Aug06/2020 -- New Config: WestlawNext Campus Research --
+##IncludeFile databases/westlawnextcanada.txt
+
+# ALEX merged westlaw stanzas
+##IncludeFile databases/westlaw-alex.txt
+
+# Oct14/2020 - custom stanzas from Westlaw; order precedence
+IncludeFile databases.custom/proview.txt
+IncludeFile databases.custom/westlaw.txt
+
+# Added Oct08/2020 -- New Config: Cairn --
+IncludeFile databases/cairn.txt
+
+# Added Oct08/2020 -- New Config: Routledge Encyclopedia of Philosophy --
+IncludeFile databases/routledgeep.txt
+
+# Added Oct08/2020 -- New Config: The Learning and Technology Library --
+##IncludeFile databases/learntechlib.txt
+IncludeFile databases/learningandtechnology.txt
+
+# Added Oct08/2020 -- New Config: Palgrave Journals --
+IncludeFile databases/palgravejournals.txt
+
+# Added Oct08/2020 -- New Config: ASME Digital Collection --
+IncludeFile databases/asme.txt
+
+# Added Oct08/2020 -- New Config: PsychiatryOnline (American Journal of Psychiatry) --
+IncludeFile databases/psychiatryonline.txt
+
+# Added Oct08/2020 -- New Config: LLMC Digital --
+IncludeFile databases/llmcdigital.txt
+
+# Added Oct08/2020 -- New Config: New York Review of Books --
+IncludeFile databases/nybooks.txt
+
+# Added Oct08/2020 -- New Config: ICE Virtual Library --
+IncludeFile databases/icevirtuallibrary.txt
+
+# Added Oct08/2020 -- New Config: Films on Demand --  Unique ID to access on one**
+IncludeFile databases/filmsondemand.txt
+
+# Added Oct08/2020 -- New Config: Justis --
+IncludeFile databases/justis.txt
+
+# Added Oct14/2020 -- New Config: Harvard Education Publishing Group --
+# QQ
+IncludeFile databases/hepgjournals.txt
+
+# Added Oct20/2020 -- New Config: Our Ontario --
+IncludeFile databases.custom/ourontario.txt
+
+# Added Oct20/2020 -- New Config: Britannica Academic --
+IncludeFile databases/britannica.txt
+
+# Added Apr20/2023 -- New Config: Encyclopaedia Universalis 
+IncludeFile databases/encyclopaediauniversalis.txt
+
+# Added Oct20/2020 -- New Config: EMS Publishing --
+IncludeFile databases/emspublishing.txt
+
+# Added Oct20/2020 -- New Config: Salem Press --
+IncludeFile databases/salempress.txt
+
+# Added Oct20/2020 -- New Config: NRC Research Press --
+IncludeFile databases/nrcresearchpress.txt
+
+# Added Oct27/2020 -- New Config: London Review of Books --
+IncludeFile databases/lrb.txt
+
+# Added Oct27/2020 -- New Config: Academy of Management --
+IncludeFile databases/aom.txt
+
+# Added Oct27/2020 -- New Config: Guilford Publications --
+IncludeFile databases/guildfordjournals.txt
+
+# Added Oct29/2020 -- New Config: Sixteenth Century Journal --
+IncludeFile databases/sixteenth_century_journal.txt
+
+# Added Oct29/2020 -- New Config: IOS Press --
+IncludeFile databases/iospress.txt
+
+# Added Oct29/2020 -- New Config: Brepols Online --
+IncludeFile databases/brepolsonline.txt
+
+# Added Oct29/2020 -- New Config: American Society for Microbiology --
+IncludeFile databases/asm.txt
+
+# Added Nov03/2020 -- New Config: On-Core --
+# Disabled Nov03/2020; see below -- New Config: On-Core --
+IncludeFile databases/oncore.txt
+
+# Added Nov10/2020 -- New Config: National Film Board of Canada --
+IncludeFile databases/nfb.txt
+
+# Added Nov10/2020 -- New Config: Europresse/Eureka --
+IncludeFile databases/europresse.txt
+
+# Added Nov10/2020 -- New Config: JoVE --
+IncludeFile databases/jove.txt
+
+# Added Nov10/2020 -- New Config: ASPET Journals Online --
+IncludeFile databases/aspetjournals.txt
+
+# Added Nov10/2020 -- New Config: Europa World Plus --
+IncludeFile databases/europaworld.txt
+
+# Added Nov11/2020 -- New Config: CHEST Publications --
+# --> not subscribed, needed?
+IncludeFile databases/chestpublications.txt
+
+# Added Nov11/2020 -- New Config: The Company of Biologists --
+# --> not subscribed, needed?
+IncludeFile databases/biologists.txt
+
+# Added Nov11/2020 -- New Config: Endocrine Society --
+# --> not subscribed, needed?
+IncludeFile databases/endocrine.txt
+
+# Added Nov11/2020 -- New Config: Bioscientifica --
+IncludeFile databases/bioscientifica.txt
+
+# Added Nov11/2020 -- New Config: Rockefeller University Press --
+IncludeFile databases/rupress.txt
+
+# Disabled Feb01/2022; see below -- New Config: NEJM Group --
+## Added Nov11/2020 -- New Config: NEJM Journal Watch --
+#IncludeFile databases/nejm_journalwatch.txt
+
+# Added Nov11/2020 -- New Config: ICLR.3 --
+IncludeFile databases/iclr.txt
+
+# Added Nov17/2020 -- New Config: INFORMS PubsOnline --
+IncludeFile databases/informspubs.txt
+
+# Added Nov17/2020 -- New Config: Title Lyell Collection: Geological Society Publications Online --
+IncludeFile databases/lyellcollection.txt
+
+# Added Nov17/2020 -- New Config: Radiological Society of North America --
+IncludeFile databases/rsnajnls.txt
+
+# Added Nov17/2020 -- New Config: Science - AAAS --
+IncludeFile databases/science.txt
+
+# Added Nov17/2020 -- New Config: Mathematical Sciences Publishers --
+IncludeFile databases/msp.txt
+
+# Added Nov17/2020 -- New Config: PrivCo --
+IncludeFile databases/privco.txt
+
+# Added Nov17/2020 -- New Config: Digital Theatre Plus --
+IncludeFile databases/digitaltheatreplus.txt
+
+# Added Nov17/2020 -- New Config: Microbiology Society Journals --
+IncludeFile databases/microbiologyresearch.txt
+
+# Added Nov17/2020 -- New Config: Criterion --
+IncludeFile databases/routledgeem.txt
+
+# Added Nov17/2020 -- New Config: Journal of Jewish Studies --
+IncludeFile databases/jewishstudies.txt
+
+# Added Nov17/2020 -- New Config: The Lawyer's Daily Academic --
+IncludeFile databases/lawyersdaily.txt
+
+# Added Nov18/2020 -- New Config: Film Platform --
+IncludeFile databases/filmplatform.txt
+
+# Added Nov18/2020 -- New Config: Fulcrum --
+IncludeFile databases/acls.txt
+
+# Added Nov18/2020 -- New Config: Scientific American --
+IncludeFile databases/scientificamerican.txt
+
+# Added Nov18/2020 -- New Config: Emerald --
+IncludeFile databases/emeraldinsight.txt
+
+# Added Nov18/2020 -- New Config: LibLynx --
+IncludeFile databases/liblynx.txt
+
+# Added Nov18/2020 -- New Config: DynaMed --
+IncludeFile databases/dynamed.txt
+
+# Added Nov18/2020 -- New Config: Africa Knowledge Project --
+IncludeFile databases/africaknowledgeproject.txt
+
+# Added Nov18/2020 -- New Config: National Council of Teachers of English --
+IncludeFile databases/ncte.txt
+# Added as issue ticket 3170992 on 2024-03-21 with NCTE journal access at Queens
+#U https://publicationsncte.org
+#H publicationsncte.org
+#NeverProxy instance.metastore.ingenta.com
+#NeverProxy pub2web.metastore.ingenta.com
+
+# Added Nov18/2020 -- New Config: STAT!Ref --
+IncludeFile databases/statref.txt
+
+# Added Nov18/2020 -- New Config: Artfilms-Digital --
+IncludeFile databases/artfilmsdigital.txt
+
+# Disabled Feb01/2022; see below -- New Config: NEJM Group --
+## Added Nov26/2020 -- New Config: New England Journal of Medicine --
+#IncludeFile databases/new_england_journal_medicine.txt
+
+# Added Nov30/2020 -- New Config: Kanopy --
+IncludeFile databases/kanopy.txt
+
+# Added Nov30/2020 -- New Config: New Day Films --
+IncludeFile databases/newday.txt
+
+# Added Nov30/2020 -- New Config: VisualDx --
+IncludeFile databases/visualdx.txt
+
+# Added Dec15/2020 -- New Config: Cold Spring Harbor Laboratory Press --
+IncludeFile databases/cshlpress.txt
+
+# Added Jan04/2021 -- New Config:  Scientific.NET - Trans Tech Publications --
+IncludeFile databases/scientific.txt
+
+# Added Jan19/2021 -- New Config: Institute of Mathematics of the Polish Academy of Sciences --
+IncludeFile databases/impan.txt
+
+# Added Jan19/2021 -- New Config: Visible Body --
+IncludeFile databases/visiblebody.txt
+
+# Added Jan19/2021 -- New Config: Fold3 --
+IncludeFile databases/fold3.txt
+
+# Added Jan22/2021 -- New Config: American National Biography Online --
+IncludeFile databases/americannationalbiography.txt
+
+# Added Feb03/2021 -- New Config: The Arabidopsis Information Resource --
+IncludeFile databases/arabidopsis.txt
+
+# Added Feb08/2021 -- New Config: Old City Publishing --
+IncludeFile databases/oldcitypublishing.txt
+
+# Added Feb08/2021 -- New Config: Liebert --
+IncludeFile databases/liebertpub.txt
+
+# Added Feb08/2021 -- New Config: ASM International --
+IncludeFile databases/asminternational.txt
+
+# Added Feb18/2021 -- New Config: Pharmaceutical Press --
+IncludeFile databases/pharmaceuticalpress.txt
+
+# Added Feb18/2021 -- New Config: American Society of Tropical Medicine and Hygiene --
+IncludeFile databases/ajtmh.txt
+
+# Added Feb18/2021 -- New Config: Modern Language Association --
+IncludeFile databases/mla.txt
+
+# Added Feb18/2021 -- New Config: eHRAF Archaeology --
+IncludeFile databases/ehrafarchaeology.txt
+
+# Added Mar11/2021 -- New Config: National Council of Teachers of Mathematics --
+IncludeFile databases/nctm.txt
+
+# Added Apr01/2021 -- New Config: Handbook of Chemistry and Physics --
+IncludeFile databases/hbcpnetbase.txt
+
+# Added Apr08/2021 -- New Config: WANFANG DATA (CHINA) --
+IncludeFile databases/wanfangdata.txt
+
+# Added Apr08/2021 -- New Config: Knovel --
+IncludeFile databases/knovel.txt
+
+# Added Apr08/2021 -- New Config: RefWorks --
+IncludeFile databases/refworks.txt
+
+# Added Apr08/2021 -- New Config: Book24x7.com --
+# --> NOTE: may need to move above to keep close to includeIP control, or move control here??  
+#IncludeFile databases/Books24x7.txt
+
+# Added Apr16/2021 -- New Config: Lexis Advance Quicklaw -- it has been deprecated- by the vendor and replaced or updated to -- LexisNexis  --
+#IncludeFile databases/lexisnexis.txt
+#IncludeFile databases/lexis.txt
+
+# Added Apr19/2021 -- New Config: Wiley Digital Archives --
+IncludeFile databases/wileydigitalarchives.txt
+
+# Added Jun09/2021 -- New Config: John Benjamins e-Platform --
+IncludeFile databases/jbeplatform.txt
+
+# Added Jun09/2021 -- New Config: Anatomy.TV --
+IncludeFile databases/anatomytv.txt
+
+# Added Jun09/2021 -- New Config: McIntyre Media --
+IncludeFile databases/mcintyre.txt
+
+# Added Jun11/2021 -- New Config: ALA Journals --
+IncludeFile databases/ala.txt
+
+# Added Jun11/2021 -- New Config: Canada Law Book --
+IncludeFile databases/canadalawbook.txt
+
+# Added Jun11/2021 -- New Config: Canadian Nurse --
+IncludeFile databases/canadian-nurse.txt
+
+# Added Jun11/2021 -- New Config: Canadian Arctic Resources Committee --
+IncludeFile databases/carc.txt
+
+# Added Jun11/2021 -- New Config: CardLite --
+IncludeFile databases/cardonline.txt
+
+# Added Jun11/2021 -- New Config: Canadian Association of Social Workers --
+IncludeFile databases/casw-acts.txt
+
+# Added Jun11/2021 -- New Config: CCOHS --
+IncludeFile databases/ccohs.txt
+
+# Added Jun11/2021 -- New Config: Discover Magazine --
+IncludeFile databases/discovermagazine.txt
+
+# Added Jun11/2021 -- New Config: McNabb Connolly --
+IncludeFile databases/mcnabbconnolly.txt
+
+# Added Jun11/2021 -- New Config: Canadian Journal for the Study of Adult Education --
+IncludeFile databases/msvu.txt
+
+# Added Jun11/2021 -- New Config: Playback --
+IncludeFile databases/playbackonline.txt
+
+# Added Jun27/2024 -- New Config: Repere --
+IncludeFile databases/repere.txt
+
+# Added Jun11/2021 -- New Config: Repere 2 --
+IncludeFile databases/repere2.txt
+
+# Added Jun11/2021 -- New Config: Repere 4 --
+IncludeFile databases/repere4.txt
+
+# Added Jun11/2021 -- New Config: Sagamore Publishing --
+IncludeFile databases/sagamorepub.txt
+
+# Added Jun11/2021 -- New Config: Teen Health and Wellness --
+IncludeFile databases/teenhealthandwellness.txt
+
+# Added Jun11/2021 -- New Config: Conference Board of Canada --
+IncludeFile databases/conferenceboard.txt
+
+# Added Jun11/2021 -- New Config: Naxos --
+IncludeFile databases/naxos.txt
+
+# Added Jun29/2021 -- New Config: Canadian Pharmacists Association --
+IncludeFile databases/pharmacists-ca.txt
+
+# Added Aug27/2021 -- New Config: vLex --
+IncludeFile databases/vlex.txt
+
+# Added Sep03/2021 -- New Config: Reichert Media Library --
+IncludeFile databases/reichert-media-library.txt
+
+# Added Oct12/2021 -- New Config: Project Euclid --
+IncludeFile databases/projecteuclid.txt
+
+# Added Oct19/2021 -- New Config: The MIT Press Direct --
+IncludeFile databases/mitpressdirect.txt
+
+# Added Oct26/2021 -- New Config: Exact Editions --
+IncludeFile databases/exacteditions.txt
+
+# Added Oct26/2021 -- New Config: Policy Commons --
+IncludeFile databases/policycommons.txt
+
+# Added Nov16/2021 -- New Config: Radical Philosophy --
+IncludeFile databases/radicalphilosophy.txt
+
+# Added Nov16/2021 -- New Config: OSA Publishing --
+IncludeFile databases/osapublishing.txt
+
+# Added Nov16/2021 -- New Config: PEP Web --
+IncludeFile databases/pepweb.txt
+
+# Added Nov16/2021 -- New Config: Reaxys --
+IncludeFile databases/reaxys.txt
+
+# Added Jan03/2022 -- New Config: Science & Medicine --
+IncludeFile databases/sciandmed.txt
+
+# Added Jan03/2022 -- New Config: Scholarly Publishing Collective --
+IncludeFile databases/scholarlypulishingcollective.txt
+
+# Added Jan12/2022 -- New Config: Preqin - Production --
+IncludeFile databases/preqin.txt
+
+# Added Jan27/2022 -- New Config: Association for Information Systems (AIS) --
+IncludeFile databases/aisnet.txt
+
+# Added Feb01/2022 -- New Config: NEJM Group --
+IncludeFile databases/nejm_group.txt
+
+# Added Feb01/2022 -- New Config: JFlix Movie Discovery --
+IncludeFile databases/jflix.txt
+
+# Added Feb02/2022 -- New Config: CollegeSource --
+IncludeFile databases/collegesource.txt
+
+# Added Feb02/2022 -- New Config: American Chemical Society --
+# QQ
+IncludeFile databases/acs.txt
+
+# Added Feb02/2022 -- New Config: SPIE Digital Library --
+IncludeFile databases/spie.txt
+
+# Added Feb02/2022 -- New Config: ProQuest CultureGrams --
+IncludeFile databases/culturegrams.txt
+
+# Added Feb02/2022 -- New Config: Accessible Archives -- 
+IncludeFile databases/accessible.txt
+
+# Added Feb02/2022 -- New Config: World Tourism Organization (WTO) -- 
+IncludeFile databases/unwto.txt
+
+# Added Feb02/2022 -- New Config: Metropolitan Opera on Demand --
+# QQ
+IncludeFile databases/metopera.txt
+
+# Added Feb02/2022 -- New Config: CLCD --
+IncludeFile databases/clcd.txt
+
+# Added Feb02/2022 -- New Config: DRAM --
+IncludeFile databases/dram.txt
+
+# Added Feb02/2022 -- New Config: R2Library --
+# QQ
+IncludeFile databases/r2library.txt
+
+# Added Feb08/2022 -- New Config: ASCO --
+# QQ
+IncludeFile databases/asco.txt
+
+# Added Feb08/2022 -- New Config: ClinicalKey --
+IncludeFile databases/clinicalkey.txt
+
+# Added Feb17/2022 -- New Config: Chicago Manual of Style --
+# QQ
+IncludeFile databases/chicagomanual.txt
+
+# Added Mar04/2022 -- New Config: SciVal
+# QQ
+IncludeFile databases/scival.txt
+
+# Added Mar09/2022 -- New Config: Journal of Rheumatology
+# QQ
+IncludeFile databases/journal_of_rheumatology.txt
+
+# Added Apr14/2022 -- New Config: JOMI Surgical Video Journal
+# QQ
+IncludeFile databases/jomi.txt
+
+# Added Jun28/2022 -- New Config: American Society for Cell Biology
+IncludeFile databases/cellbiology.txt
+
+# Added Jun28/2022 -- New Config: European Respiratory Society
+IncludeFile databases/ersjournals.txt
+
+# Added Jun28/2022 -- New Config: American Society of Hematology 
+IncludeFile databases/hematology.txt
+
+# Added Jun28/2022 -- New Config: JOSPT - Journal of Orthopaedic & Sports Physical Therapy
+IncludeFile databases/jospt.txt
+
+# Added Sept6/2022 -- New Config: Bristol University Press Digital
+IncludeFile databases/bristoluniversitypress.txt
+
+# Added Sept29/2022 -- New Config: PEN Nutrition
+IncludeFile databases/pennutrition.txt
+
+# Added Nov08/2022 -- New Config: Statistics Canada: Rich Data Services
+IncludeFile databases/statscanrds.txt
+
+# Added Nov17/2022 -- New Config: Nova Science Publishers
+IncludeFile databases/novasciencepublishers.txt
+
+# Added Jan06/2023 -- New Config: Mark Allen Group
+IncludeFile databases/markallengroup.txt
+
+# Added April05/2023 -- New Config: CAN-Core Video 
+IncludeFile databases/cancore.txt
+
+# Added April17/2023 -- New Config: Grant Connect
+IncludeFile databases/grantconnect.txt
+
+# Added April18/2023 -- New Config: Statista
+IncludeFile databases/statista.txt
+
+# Added April19/2023 -- New Config: IPA Soruce
+IncludeFile databases/ipasource.txt
+
+# TO CHECK FIRST
+# Added Sep14/2020 -- New Config: Canadian Medical Association --
+#IncludeFile databases/cma.txt
+
+#-----NEW EXAMPLE TO COPY/USE
+# Added Feb01/2022 -- New Config: Criterion --
+# Disabled Feb01/2022; see below -- New Config: Criterion --
+#IncludeFile databases/criterion.txt
+
+
+#
+# Stanzas to check; put into files and verify still needed
+# 
+
+# Added Nov18/2020 -- New Config: Criterion --
+# Disabled Nov18/2020; see below -- New Config: Criterion --
+#IncludeFile databases.check/criterion.txt
+
+
+#
+# Custom stanzas
+# 
+
+# Added Jul13/2020 -- New Config: LeRobert-DeMarque --
+IncludeFile databases.custom/lerobert-demarque.txt
+
+# Added Nov18/2020 -- New Config: Queen's Economics Software --
+IncludeFile databases.custom/queensu-econ.txt
+
+# Added Dec17/2020 -- New Config: Civic Research Institute --
+IncludeFile databases.custom/civic-research.txt
+
+# Added Apr09/2021 -- New Config: Audio Cine --
+IncludeFile databases.custom/audio-cine.txt
+
+# Added Apr26/2021 -- New Config: Elgar Advanced Introductions: Law --
+IncludeFile databases.custom/elgar-advancedintros.txt
+
+# Added Nov02/2021 -- New Config: Journal on Excellence in College Teaching --
+IncludeFile databases.custom/exellence-college-teaching.txt
+
+# Added Nov23/2021 -- New Config: USask iPortal --
+IncludeFile databases.custom/usask-iportal.txt
+
+# Added Nov30/2021 -- New Config: Alberta Journal of Education Research --
+IncludeFile databases.custom/alberta-journal-education-research.txt
+
+# Added Dec15/2021 -- New Config: Queen's Streaming Server --
+IncludeFile databases.custom/queensu-stream.txt
+
+# Added Jun03/2022 -- New Config: MicroForm --
+IncludeFile databases.custom/microform-digital.txt
+
+# Added Jun10/2022 -- New Config: Klapp Online --
+IncludeFile databases.custom/klapp-online.txt
+
+# Added Dec16/2022 -- New Config: Zfdphdigital
+IncludeFile databases/zfdphdigital.txt
+
+#Added May 2/2023 -- New Config: Intellect Discovery
+IncludeFile databases/intellectdiscover.txt
+
+#Added Nov27/2023 -- New Config: Mohr Siebeck 
+IncludeFile databases/mohrsiebeck.txt
+
+#
+# Sites that are on trial period
+#  --> remember to remove/move above at end of trial
+#
+
+
+# Added Mar15/2021 -- Trial Config: Bloomsbury Digital --
+# --> Bloomsbury Design Library (Mar15-Apr15/2021)
+IncludeFile databases.trial/bloomsburydigitalresources-trial.txt
+
+# Added Mar13/2025 -- Trial Config: Examine (Mar13-Apr12/2025)
+AnonymousURL +https://api.examine.com/*
+AnonymousURL +https://i.examine.com/indexes/content/*
+AnonymousURL +https://search.examine.com/indexes/content/*
+Title Examine (updated 20241223)
+HTTPHeader -response -process Next-Router-State-Tree
+HTTPHeader -response -process Next-Router-Prefetch
+HTTPHeader -request -process Next-Action
+HTTPHeader -response -process Next-Action
+HTTPHeader -request -process Next-Url
+HTTPHeader -response -process Next-Url
+HTTPHeader -response -process Rsc
+URL https://examine.com
+H https://examine.com
+H examine.com
+H https://api.examine.com
+H api.examine.com
+H https://i.examine.com
+H i.examine.com
+H https://www.examine.com
+H www.examine.com
+D examine.com
+AnonymousURL -*
+
+# Added Jun 2/2022 -- Trial Config: BioCyc --
+# Trial runs Jun 15/22-Jul 15/22
+IncludeFile databases.trial/biocyc.txt
+
+# Added June6/2023 -- Trial Config: Mediciv.tv
+Title Medici TV EDU (updated 20180612)
+URL https://edu.medici.tv
+HJ http://edu.medici.tv
+DJ medici.tv
+NeverProxy secure-medias.medici.tv
+
+#Added Oct23/2023 -- Trial Config: Canada Commons -- Trial ended on April22/2024
+Title Canada Commons (updated 20220106)
+URL https://canadacommons.ca
+DJ canadacommons.ca
+NeverProxy https://coherent-commons.s3.amazonaws.com
+NeverProxy https://res.cloudinary.com
+NeverProxy https://posthog.coherentdigital.net
+NeverProxy https://i2.wp.com
+
+#Added July29/2024 -- History Commons -- after trial ended on April22/2024
+IncludeFile databases/historycommons.txt
+
+#Added on July29/2024 -- Le Grand Robert & Collins --
+Title Le Grand Robert & Collins
+URL https://grc.lerobert.com/login.asp
+HJ https://syrano.demarque.com/Access/connExt.php?idRelPC=531313
+HJ http://syrano.demarque.com/Access/connExt.php?idRelPC=531313
+
+# Trial resource -- added Oc 25/2023 trial expires Nov30/2023
+Title Scite (updated 20211112)
+URL https://scite.ai
+HJ http://www.scite.ai
+DJ scite.ai
+NeverProxy api.scite.ai
+NeverProxy cdn.scite.ai
+
+#Added on Aug30/2024 -- Career Cruising --
+IncludeFile databases/careercruising.txt
+
+# Added May8/2024 -- New Config: 4Canoes Digital Bookshelf -- as a new acquisition on 20240508
+Title 4Canoes Digital Bookshelf
+URL https://4canoes.org
+HJ https://4canoesportal.org/queens/
+
+# Added Jan23/2025 -- New Config: Musicultures
+IncludeFile databases/musicultures.txt
+
+#Added Apr29/2025 -- New Config: Journal of Sport Behavior
+T Journal of Sport Behavior
+U https://journalofsportbehavior.org/index.php/JSB
+HJ journalofsportbehavior.org
+DJ journalofsportbehavior.org
+Find journalofsportbehavior.org
+Replace ^sjournalofsportbehavior.org^
+#
+# ---- END NEW CONFIG ----
+
