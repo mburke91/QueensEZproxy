@@ -1,0 +1,13 @@
+# Sep18/2020
+Title Cell Press (updated 20181003)
+URL https://www.cell.com
+HJ www.cell.com
+HJ https://www.cell.com
+HJ www.cellpress.com
+HJ https://www.cellpress.com
+HJ cell.com
+HJ https://id.elsevier.com
+DJ cell.com
+HJ https://secure.jbs.elsevierhealth.com
+HJ acw.elsevier.com
+DJ elsevierhealth.com

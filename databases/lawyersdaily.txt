@@ -1,0 +1,12 @@
+# Nov17/2020; updated Mar 08/2023
+
+T Law360 Canada
+U https://www.law360.ca/
+HJ www.law360.ca
+DJ law360.ca
+DJ lexisnexis.com 
+
+#Title The Lawyer's Daily Academic (updated 20170905)
+#URL https://www.thelawyersdaily.ca
+#DJ thelawyersdaily.ca
+#DJ lexisnexis.com

@@ -1,0 +1,44 @@
+# Mar 29/2022; updated Oct27/2022; updated Apr23/2025
+#This stanza is required to resolve the Cookie Banner popup solution IncludeFile databases/cookielaw.txt
+
+Option Cookie
+HTTPMethod PUT
+HTTPMethod PATCH
+HTTPMethod OPTIONS
+HTTPMethod DELETE
+Title JSTOR (updated 20250421)
+HTTPHeader -request -process X-Requested-With
+URL http://www.jstor.org/
+HJ https://www.jstor.org
+HJ www.jstor.org
+HJ www.jstore.org
+HJ jstor.org
+HJ jstore.org
+HJ dfr.jstor.org
+HJ labs.jstor.org
+HJ links.jstor.org
+HJ mobile.jstor.org
+HJ about.jstor.org
+HJ plants.jstor.org
+HJ uk.jstor.org
+HJ https://uk.jstor.org
+HJ https://dfr.jstor.org
+HJ https://labs.jstor.org
+HJ https://links.jstor.org
+HJ https://mobile.jstor.org
+HJ https://about.jstor.org
+HJ https://plants.jstor.org
+HJ https://uk.jstor.org
+DJ jstor.org
+Option Cookie
+
+Option Cookie
+Title JSTOR Aluka
+HTTPHeader -request -process X-Requested-With
+URL http://www.aluka.org/
+HJ https://www.aluka.org
+HJ www.aluka.org
+HJ aluka.org
+HJ https://aluka.org
+DJ aluka.org
+Option Cookie

@@ -1,0 +1,10 @@
+# Mar11/2021; updated Jan04/2023
+T National Council of Teachers of Mathematics (OCLC IncludeFile updated 20230103)
+HTTPHeader -request -process X-Requested-With
+U https://www.nctm.org/
+HJ https://nctm.org
+HJ https://pubs.nctm.org
+HJ nctm.org
+HJ pubs.nctm.org
+HJ www.nctm.org
+DJ nctm.org

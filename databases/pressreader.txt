@@ -1,0 +1,30 @@
+# Jul17/2020; updated Apr25/2025
+AnonymousURL +*.ttf*
+AnonymousURL +*.woff*
+AnonymousURL +*.woff2*
+Title PressReader (updated 20250401)
+HTTPHeader -request -process Access-Control-Allow-*
+URL https://www.pressreader.com
+HJ https://library.pressdisplay.com
+HJ https://pressreader.com
+HJ https://r.prcdn.co
+HJ https://www.pressdisplay.com
+HJ https://www.pressreader.com
+HJ ndcds.trafficmanager.net
+HJ pressreader.com
+HJ secure.newspaperdirect.com
+HJ services.pressdisplay.com
+HJ www.pressreader.com
+DJ pressdisplay.com
+DJ pressreader.com
+AnonymousURL -*
+NeverProxy cdn-res.pressreader.com
+NeverProxy cdn2-res.pressreader.com
+NeverProxy cdn3-img.pressreader.com
+NeverProxy cdn3-res.pressreader.com
+NeverProxy cdn3-svc.pressreader.com
+NeverProxy cdn3-tts.pressreader.com
+NeverProxy ingress-cdn.pressreader.com
+NeverProxy ingress.pressreader.com
+NeverProxy services.pressreader.com
+NeverProxy svc.pressreader.com

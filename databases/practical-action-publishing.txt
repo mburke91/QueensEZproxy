@@ -1,0 +1,14 @@
+# Aug13/2020
+T Practical Action Publishing
+HTTPHeader -response -edit Location RewriteURL(REReplace("!https://practicalactionpublishing\.com/pdf!g", RewriteURL("https://practicalactionpublishing.com/pdf"), hh:value))
+U https://practicalactionpublishing.com/
+HJ https://practicalactionpublishing.com/
+HJ https://www.practicalactionpublishing.com/
+HJ practicalactionpublishing.com
+HJ www.practicalactionpublishing.com
+HJ https://developmentbookshelf.com/
+HJ developmentbookshelf.com
+HJ https://www.developmentbookshelf.com/
+HJ www.developmentbookshelf.com
+DJ developmentbookshelf.com
+DJ practicalactionpublishing.com

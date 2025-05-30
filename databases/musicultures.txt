@@ -1,0 +1,6 @@
+T Musicultures
+U https://journals.lib.unb.ca/index.php/MC
+DJ journals.lib.unb.ca
+HJ journals.lib.unb.ca
+Find journals.lib.unb.ca
+Replace ^sjournals.lib.unb.ca^

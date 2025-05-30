@@ -1,0 +1,17 @@
+# Nov16/2021
+AnonymousURL +*.ttf*
+AnonymousURL +*.woff*
+Title Rockefeller University Press (updated 20211105)
+URL https://rupress.org
+HJ https://jcb.rupress.org
+HJ https://jem.rupress.org
+HJ https://jgp.rupress.org
+HJ https://rupress.org
+HJ https://www.rupress.org
+HJ jcb.rupress.org
+HJ jem.rupress.org
+HJ jgp.rupress.org
+HJ rupress.org
+HJ www.rupress.org
+DJ rupress.org
+AnonymousURL -*

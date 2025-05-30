@@ -1,0 +1,6 @@
+# Oct29/2020
+Title Sixteenth Century Journal
+URL http://escj.org
+Host escj.org
+Host www.escj.org
+Domain escj.org

@@ -1,0 +1,54 @@
+# Oct04/2021
+Title Torrossa Casalini Full Text Platform (updated 20210916)
+URL http://www.torrossa.com
+HJ digital.casalini.it
+HJ docs.crypto-service.com
+HJ https://digital.casalini.it
+HJ https://torrossa.com
+HJ https://www.casalini.it
+HJ torrossa.com
+HJ torrossa.de
+HJ torrossa.eu
+HJ torrossa.it
+HJ www.casalini.it
+HJ www.torrossa.com
+HJ www.torrossa.de
+HJ www.torrossa.es
+HJ www.torrossa.eu
+HJ www.torrossa.it
+DJ casalini.it
+DJ torrossa.com
+DJ torrossa.de
+DJ torrossa.es
+DJ torrossa.it
+DJ crypto-service.com
+
+Title Torrossa (updated 20210505)
+URL https://access.torrossa.com
+HJ access.torrossa.com
+Domain torrossa.com
+DJ access.torrossa.com
+
+Title Torrossa Store (updated 20210505)
+URL https://www.torrossa.com
+Domain torrossa.com
+DJ www.torrossa.com
+
+Title Casalini Torrossa (updated 20210505)
+URL http://digital.casalini.it
+Domain casalini.it
+DJ digital.casalini.it
+
+Title Casalini Crypto Service (updated 20210505)
+URL https://docs.crypto-service.com
+Domain crypto-service.com
+DJ docs.crypto-service.com
+
+Title Libraweb (updated 20210505)
+ByteServe https://www\.libraweb\.net/pdfviewer/.*
+URL https://www.libraweb.net
+HJ https://libraweb.net
+HJ https://www.libraweb.net
+HJ libraweb.net
+HJ www.libraweb.net
+DJ libraweb.net

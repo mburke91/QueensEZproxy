@@ -1,0 +1,8 @@
+# added April20/2023
+T Encyclopaedia Universalis
+U https://www.universalis-edu.com/?tag64=L0dMT0JBTC1FQi80NjQ4OGEyODQxYjI5&accountId=305917
+U https://junior.universalis-edu.com/?tag64=L0dMT0JBTC1FQi80NjQ4OGEyODQxYjI5&accountId=305917
+HJ universalis-edu.com
+HJ french.eb.com
+DJ universalis-edu.com
+DJ eb.com

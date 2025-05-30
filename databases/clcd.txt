@@ -1,0 +1,12 @@
+# Apr 7/2022
+Title Children's Literature Comprehensive Database (CLCD)
+URL https://enterprise.clcd.com/
+HJ www.clcd.com
+HJ enterprise.clcd.com
+DJ enterprise.clcd.com
+DJ clcd.com
+
+# Local add
+Title	-hide Children's Literature Comprehensive Database
+U	https://www.childrenslit.com/
+DJ	childrenslit.com

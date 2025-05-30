@@ -1,0 +1,9 @@
+# Mar 8/2022; updated Oct31/2024
+Title Lyell Collection: Geological Society Publications Online (updated 20241011)
+URL https://www.lyellcollection.org/
+HJ gsl.scienceconnect.io
+HJ https://gsl.scienceconnect.io
+HJ https://lyellcollection.org
+HJ www.lyellcollection.org
+DJ lyellcollection.org
+DJ geolsoc.org.uk

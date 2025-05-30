@@ -1,0 +1,8 @@
+# Nov30/2020 updated Oct13/2022; updated Nov7/2023
+T New Day Films
+U https://www.newday.com
+HJ https://www.newday.com
+HJ https://account.newday.com
+DJ newday.com
+Find account.newday.com
+Replace ^Saccount.newday.com^

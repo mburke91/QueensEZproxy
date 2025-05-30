@@ -1,0 +1,10 @@
+# Nov30/2020
+Title Kanopy Streaming (updated 20180418)
+URL http://queensu.kanopystreaming.com
+HJ https://queensu.kanopystreaming.com
+DJ kanopystreaming.com
+
+Title Kanopy (updated 20180418)
+URL http://queensu.kanopy.com
+HJ https://queensu.kanopy.com
+DJ kanopy.com

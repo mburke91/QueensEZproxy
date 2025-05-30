@@ -1,0 +1,30 @@
+# Nov18/2020, (updated 20240320, picked up from NTCE's FAQ page); updated 20240430
+# Please include the following 4 lines at any new update. This was picked up from NTCE's FAQ page 20240320 to fix an access issue.
+# U https://publicationsncte.org
+# H publicationsncte.org
+# NeverProxy instance.metastore.ingenta.com
+# NeverProxy pub2web.metastore.ingenta.com
+Title National Council of Teachers of English (20240411)
+U https://publicationsncte.org
+H publicationsncte.org
+URL http://www.ncte.org/
+HJ https://cccc.ncte.org
+HJ https://library.ncte.org
+HJ https://ncte.org
+HJ https://secure.ncte.org
+HJ https://status.ncte.org
+HJ https://www.ncte.org
+HJ https://www2.ncte.org
+HJ https://publicationsncte.org
+HJ publicationsncte.org
+HJ cccc.ncte.org
+HJ library.ncte.org
+HJ ncte.org
+HJ status.ncte.org
+HJ www.ncte.org
+HJ www2.ncte.org
+DJ publicationsncte.org
+DJ ncte.org
+Neverproxy apiv2.ncte.org
+NeverProxy instance.metastore.ingenta.com
+NeverProxy pub2web.metastore.ingenta.com

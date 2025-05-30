@@ -1,0 +1,13 @@
+# Jun09/2020
+# Added per Issue #87941
+Option DomainCookieOnly
+T Criterion
+U https://media3.criterionpic.com
+HJ media3.criterionpic.com
+HJ www.criterionpic.com
+HJ criterionpic.com
+HJ www.criterionondemand.com
+HJ criterionondemand.com
+DJ criterionpic.com
+DJ criterionondemand.com
+Option Cookie

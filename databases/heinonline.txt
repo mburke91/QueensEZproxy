@@ -1,0 +1,32 @@
+# Jun 28/2022; updated Jan04/2023; updated Feb24/2023; updated July13/2023; updated Oct23/2023,updated Dec20/2023, updated 20140130, stanzas updated on 20240229; updated on 20240401;updated on 20240430
+AnonymousURL +https://heinonline.org/HOL/AuthorListMyHein*
+AnonymousURL +https://my.heinonline.org/myhein/*
+AnonymousURL +https://my.heinonline.org/js/*
+AnonymousURL +https://heinonline.org/static/*
+AnonymousURL +https://heinonline.org/HeinDocs/*
+AnonymousURL +https://heinonline.org/HOL/MyHeinTestMyHein*
+Title HeinOnline (updated 20240325)
+MimeFilter text/event-stream .* javascript
+MimeFilter ^$ https?://heinonline.org/HOL/.* javascript
+URL http://www.heinonline.org/HOL/Welcome
+HJ heinonline.org
+HJ home.heinonline.org
+HJ www.heinonline.org
+HJ my.heinonline.org
+HJ tim.heinonline.org
+HJ https://heinonline.org
+HJ https://home.heinonline.org
+HJ https://www.heinonline.org
+HJ https://tim.heinonline.org
+HJ https://my.heinonline.org
+HJ https://delaware.heinonline.org
+HJ http://delaware.heinonline.org
+HJ https://franklin.heinonline.org
+HJ http://franklin.heinonline.org
+HJ https://brandon.heinonline.org
+HJ http://brandon.heinonline.org
+DJ heinonline.org
+Option AllowSendGZip
+Find document.domain
+Replace "heinonline.org"
+AnonymousURL -*

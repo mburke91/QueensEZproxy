@@ -1,0 +1,12 @@
+#added Apr17/2023
+Title Grant Connect (updated05012023)
+AnonymousURL +https://api.grantconnect.ca*
+Title Grant Connect
+URL https://grantconnect.ca/search
+HJ grantconnect.ca
+HJ https://grantconnect.ca
+HJ http://connexionsubvention.ca
+DJ grantconnect.ca
+AnonymousURL -*
+
+

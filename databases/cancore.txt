@@ -1,0 +1,8 @@
+NeverProxy *.amazonaws.com
+T Can-Core AV
+U https://academic.can-core.ca
+H academic.can-core.ca
+HJ academic.can-core.ca
+D academic.can-core.ca
+DJ academic.can-core.ca
+

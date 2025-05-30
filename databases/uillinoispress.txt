@@ -1,0 +1,17 @@
+# Jul23/2020
+Title University of Illinois Press (updated 20200515)
+URL https://www.press.uillinois.edu
+HJ apq.press.uillinois.edu
+HJ hpq.press.uillinois.edu
+HJ press.uillinois.edu
+HJ www.press.uillinois.edu
+HJ apq.press.illinois.edu
+HJ hpq.press.illinois.edu
+HJ https://paq.press.uillinois.edu
+HJ paq.press.uillinois.edu
+HJ press.illinois.edu
+HJ https://paq.press.uillinois.edu
+HJ paq.press.uillinois.edu
+HJ www.press.illinois.edu
+DJ illinois.edu
+DJ uillinois.edu

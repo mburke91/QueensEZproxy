@@ -1,0 +1,8 @@
+# Nov03/2020
+NeverProxy *.amazonaws.com
+T On-Core
+U https://www.on-core.ca
+H www.on-core.ca
+HJ www.on-core.ca
+D www.on-core.ca
+DJ www.on-core.ca

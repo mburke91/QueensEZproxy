@@ -1,0 +1,54 @@
+# Dec15/2020; update Sept30/2024
+Title Dalloz (20240916)
+HTTPHeader -request -process Book-Authorization
+HTTPHeader -request -process Accept-Encoding
+MimeFilter application/json .* javascript
+MimeFilter text/plain .* javascript
+URL https://www.dalloz.fr/etudiants
+HJ dalloz-actualite.fr
+HJ dalloz-avocats.fr
+HJ dalloz-bibliotheque.fr
+HJ dalloz-boutique.fr
+HJ dalloz-enseignants.fr
+HJ dalloz-etudiant.fr
+HJ dalloz-formation.fr
+HJ dalloz-revues.fr
+HJ dalloz.fr
+HJ editions-dalloz.fr
+HJ https://connexion.dalloz.fr
+HJ https://jurisprudence.lefebvre-dalloz.fr
+HJ https://secureidpga.dalloz.fr
+HJ https://www.dalloz-bibliotheque.fr
+HJ https://www.jurisprudence.dalloz-avocats.fr
+HJ jurisprudence.lefebvre-dalloz.fr
+HJ prepa-dalloz.fr
+HJ www.dalloz-actualite.fr
+HJ www.dalloz-avocats.fr
+HJ www.dalloz-bibliotheque.fr
+HJ www.dalloz-boutique.fr
+HJ www.dalloz-enseignants.fr
+HJ www.dalloz-etudiant.fr
+HJ www.dalloz-formation.fr
+HJ www.dalloz-revues.fr
+HJ www.dalloz.fr
+HJ www.editions-dalloz.fr
+HJ www.jurisprudence.dalloz-avocats.fr
+HJ www.prepa-dalloz.fr
+DJ dalloz-actualite.fr
+DJ dalloz-avocats.fr
+DJ dalloz-bibliotheque.fr
+DJ dalloz-boutique.fr
+DJ dalloz-enseignants.fr
+DJ dalloz-etudiant.fr
+DJ dalloz-formation.fr
+DJ dalloz-revues.fr
+DJ dalloz.fr
+DJ editions-dalloz.fr
+DJ lefebvre-dalloz.fr
+DJ prepa-dalloz.fr
+Find http:\/\/www
+Replace http://www
+Find https:\/\/
+Replace https://
+Find "http:\/\/www.dalloz.fr\/
+Replace "http:\/\/^pwww.dalloz.fr^\/

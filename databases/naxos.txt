@@ -1,0 +1,54 @@
+# Nov16/2021
+Title Naxos Music Library (updated 20211026)
+URL https://queensu.naxosmusiclibrary.com
+HJ queensu.naxosmusiclibrary.com
+HJ queensu.nml3.naxosmusiclibrary.com
+HJ https://queensu.naxosmusiclibrary.com
+HJ https://queensu.nml3.naxosmusiclibrary.com
+HJ https://www.nml3.naxosmusiclibrary.com
+HJ www.nml3.naxosmusiclibrary.com
+DJ naxosmusiclibrary.com
+DJ www.naxosmusiclibrary.com
+NeverProxy cdn.naxosmusiclibrary.com
+NeverProxy cdn.naxos.com
+NeverProxy audiostream.naxosmusiclibrary.com
+NeverProxy cp82361.edgefcs.net
+
+
+Title Naxos Spoken Word Library
+URL https://queensu.naxosspokenwordlibrary.com
+HJ queensu.naxosspokenwordlibrary.com
+HJ https://queensu.naxosspokenwordlibrary.com
+DJ naxosspokenwordlibrary.com
+DJ www.naxosspokenwordlibrary.com
+NeverProxy cdn.naxosspokenwordlibrary.com
+NeverProxy cdn.naxos.com
+NeverProxy audiostream.naxosspokenwordlibrary.com
+NeverProxy cp82361.edgefcs.net
+
+
+Title Naxos Video Library
+URL https://queensu.naxosvideolibrary.com
+HJ queensu.naxosvideolibrary.com
+HJ https://queensu.naxosvideolibrary.com
+DJ naxosvideolibrary.com
+DJ www.naxosvideolibrary.com
+AnonymousURL +/NVL_
+AnonymousURL +.wm
+AnonymousURL +.wma
+AnonymousURL +/stream_play.asp?
+AnonymousURL +/stream_play_mac.asp?
+Find setTimeout("window.close();",1000);
+Replace setTimeout("window.close();",10000);
+AnonymousURL -*
+
+
+Title Naxos Works Database
+URL https://queensu.naxosworks.com
+HJ queensu.naxosworks.com
+HJ https://queensu.naxosworks.com
+DJ naxosworks.com
+DJ www.naxosworks.com
+Find setTimeout("window.close();",1000);
+Replace setTimeout("window.close();",10000);
+AnonymousURL -*

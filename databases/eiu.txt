@@ -1,0 +1,35 @@
+# Sep14/2020
+T EIU Portal
+U http://www.eiu.com/default.aspx
+H www.eiu.com
+HJ https://portal.eiu.com
+HJ eiu.com
+HJ country.eiu.com
+HJ portal.eiu.com
+HJ search.eiu.com
+HJ data.eiu.com
+HJ graphics.eiu.com
+HJ gfs.eiu.com
+HJ pages.eiu.com
+HJ service.eiu.com
+D eiu.com
+DJ EIU.com   
+T EIU Viewswire
+U http://viewswire.eiu.com
+H viewswire.eiu.com
+HJ viewswire.com
+HJ www.viewswire.com
+HJ search.eiu.com
+HJ data.eiu.com
+HJ graphics.eiu.com
+HJ service.eiu.com
+D viewswire.com
+DJ viewswire.eiu.com   
+T Economist.com via corporate IP portal
+#U (Unique client URL goes here, contact techsupport@eiu.com for assistance)
+U http://www.economist.com/
+H economist.com
+HJ www.economist.com
+HJ stage.economist.com
+D economist.com
+DJ economist.com   

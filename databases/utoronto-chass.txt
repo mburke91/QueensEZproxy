@@ -1,0 +1,53 @@
+# May04/2020
+
+# New/Combined CHASS
+T  Computing in the Humanitites and Social Sciences (CHASS)
+U  https://datacentre.chass.utoronto.ca/
+U  https://datacentre2.chass.utoronto.ca/
+U  https://dc.chass.utoronto.ca/
+U  https://dc1.chass.utoronto.ca/oed/
+U  https://dc2.chass.utoronto.ca/
+U  https://atlantis.chass.utoronto.ca/polsci/
+U  https://citibase.chass.utoronto.ca/
+U  https://clouddc.chass.utoronto.ca/
+DJ chass.utoronto.ca
+
+
+#Update to CHASS (chass.utoronto.ca).
+#This URL needs adding to the list:
+#https://citibase.chass.utoronto.ca/
+
+
+## CHASS Sites
+#T       Computing in the Humanitites and Social Sciences (CHASS)
+#U       http://datacentre.chass.utoronto.ca/
+#DJ      chass.utoronto.ca
+
+## AD may 23 03 - CHASS sites that need to be proxied
+#T OED 2
+#U http://dc1.chass.utoronto.ca/oed/
+#DJ chass.utoronto.ca
+
+#T CANSIM 2
+#U http://dc2.chass.utoronto.ca/
+#DJ chass.utoronto.ca
+
+#T CANSIM 2
+#U http://datacentre.chass.utoronto.ca/
+#DJ chass.utoronto.ca
+
+#T CANSIM 2
+#U http://datacentre2.chass.utoronto.ca/
+#DJ chass.utoronto.ca
+
+
+## Webstats software added on request from Sebastian Dellaire
+#T Webstats Software
+#U http://atlantis.chass.utoronto.ca/polsci/
+#DJ chass.utoronto.ca
+
+## Added per Issue #67025
+#T       Chass Data Centre - Faculty of Arts and Science
+#U       http://datacenter2.chass.utoronto.ca
+#DJ      datacenter2.chass.utoronto.ca
+

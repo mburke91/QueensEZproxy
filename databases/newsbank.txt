@@ -1,0 +1,36 @@
+#Updated on Apil22/2024
+Title Newsbank/Readex Databases (updated 20220628)
+MimeFilter application/octet-stream .* javascript
+URL https://infoweb.newsbank.com
+HJ docs.newsbank.com
+HJ https://docs.newsbank.com
+HJ https://newsbank.com
+HJ https://opac.newsbank.com
+HJ https://products.newsbank.com
+HJ https://stats.newsbank.com
+HJ https://www.newsbank.com
+HJ infoweb.newsbank.com
+HJ infoweb1.newsbank.com
+HJ infoweb2.newsbank.com
+HJ newsbank.com
+HJ opac.newsbank.com
+HJ products.newsbank.com
+HJ stats.newsbank.com
+HJ www.newsbank.com
+DJ newsbank.com
+Find document.domain =
+Replace document.domain = "^h"; ezproxyignore =
+NeverProxy google.com
+NeverProxy app.readspeaker.com
+NeverProxy cdn01.readspeaker.com
+NeverProxy app-na.readspeaker.com
+NeverProxy vttts-na.readspeaker.com
+NeverProxy media-na.readspeaker.com
+NeverProxy app-eu.readspeaker.com
+NeverProxy rstts-eu.readspeaker.com
+NeverProxy vttts-eu.readspeaker.com
+NeverProxy media-eu.readspeaker.com
+NeverProxy app-eas.readspeaker.com
+NeverProxy rstts-eas.readspeaker.com
+NeverProxy vttts-eas.readspeaker.com
+NeverProxy media-eas.readspeaker.com

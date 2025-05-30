@@ -1,0 +1,14 @@
+# Aug27/2021;Updated Aug30/2024
+Option DomainCookieOnly
+
+Title vLex (updated 202001204)
+URL https://vlex.com/account/login_ip
+HJ us.vlex.com
+HJ latam.vlex.com
+HJ app.vlex.com
+HJ https://app.vlex.com
+HJ vlex.com
+HJ https://justis.vlex.com
+HJ justis.vlex.com
+DJ bookshelf.vitalsource.com
+DJ vlex.com

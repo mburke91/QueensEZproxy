@@ -1,0 +1,5 @@
+# added Dec16/2022
+T Zeitschrift fur Deutsche Philologie
+U https://www.zfdphdigital.de/
+HJ www.zfdphdigital.de
+DJ zfdphdigital.de

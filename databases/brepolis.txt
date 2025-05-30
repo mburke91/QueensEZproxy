@@ -1,0 +1,28 @@
+#moved stanzas from config.txt to brepolis.txt on Oct31/2024
+Title BREPOLiS (updated 20241011)
+URL http://apps.brepolis.net/LTool/Entrance.aspx?w=1
+HJ about.brepolis.net
+HJ brepolis.net
+HJ brepols.net
+HJ clavis.brepols.net
+HJ clt.brepolis.net
+HJ cpps.brepolis.net
+HJ https://about.brepolis.net
+HJ https://apps.brepolis.net
+HJ https://brepolis.net
+HJ https://brepols.net
+HJ https://clavis.brepols.net
+HJ https://clt.brepolis.net
+HJ https://cpps.brepolis.net
+HJ https://www.brepolis.net
+HJ https://www.brepols.net
+HJ www.brepolis.net
+HJ www.brepols.net
+DJ brepolis.net
+DJ brepols.net
+Find window.location.href = "//apps.brepolis.net/
+Replace window.location.href = "https://^Sapps.brepolis.net^/
+Find window.location.href = "//cpps.brepolis.net/
+Replace window.location.href = "https://^Scpps.brepolis.net^/
+Find window.location.href = "//clt.brepolis.net/
+Replace window.location.href = "https://^Sclt.brepolis.net^/

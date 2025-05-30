@@ -1,0 +1,5 @@
+#Added on 20240627
+Title Repere (updated 20210511)
+URL http://repere.sdm.qc.ca
+HJ repere.sdm.qc.ca
+DJ sdm.qc.ca

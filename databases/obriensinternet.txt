@@ -1,0 +1,6 @@
+# Apr29/2020; Alex/Marco
+Option CookiePassThrough
+T       O'Briens Internet
+U       http://www.obriensforms.com/
+DJ      obriensforms.com
+Option Cookie

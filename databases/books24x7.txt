@@ -1,0 +1,16 @@
+# Apr08/2021
+#  using this new entry - per email from book24x7 sent to td5
+Title Book24x7.com (updated 2018-08-01)
+URL http://library.books24x7.com/library.asp?^B
+H https://library.books24x7.com/library.asp?^B
+Books24x7Site QLUOC
+TokenKey iamthewalrus
+TokenSignatureKey 2d5a82a81949a2969f15cd1f
+DJ books24x7.com
+H secure.books24x7.com
+H mobile.skillport.books24x7.com
+H mobile.books24x7.com
+H https://secure.books24x7.com
+H https://mobile.skillport.books24x7.com
+H https://mobile.books24x7.com
+NeverProxy secure.books24x7.com:443

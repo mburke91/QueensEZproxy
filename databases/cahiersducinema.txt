@@ -1,0 +1,12 @@
+#Added Feb6/2025; stanza must be updated if username or password change
+T Cahiers du cinema
+URL -Form=post cahierducin https://www.cahiersducinema.com/larevueducinema/newlogin
+FormVariable type=text
+FormVariable name=library.serials@queensu.ca
+FormVariable id=^$(jlBXnE@VZGZw0G1ekk6h1
+FormVariable value size=20
+FormVariable autocapitalize=ff
+FormVariable autocomplete=username
+FormVariable required=required
+DJ www.cahiersducinema.com
+HJ cahiersducinema.com

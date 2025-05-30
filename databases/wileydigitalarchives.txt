@@ -1,0 +1,14 @@
+# Apr19/2021
+AnonymousURL +https://api.wileydigitalarchives.com/*
+Title Wiley Digital Archives
+URL https://app.wileydigitalarchives.com/
+HJ https://app.wileydigitalarchives.com
+HJ https://api.wileydigitalarchives.com
+NeverProxy content.wileydigitalarchives.com
+NeverProxy ajax.googleapis.com
+NeverProxy cdnjs.cloudflare.com
+NeverProxy fonts.googleapis.com
+NeverProxy fonts.gstatic.com
+NeverProxy js.zapjs.com
+NeverProxy maxcdn.bootstrapcdn.com
+AnonymousURL -*

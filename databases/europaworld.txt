@@ -1,0 +1,6 @@
+# Nov10/2020
+HTTPHeader Access-Token
+Title Europa World Plus (updated 20201029)
+URL http://www.europaworld.com
+HJ www.europaworld.com
+DJ europaworld.com

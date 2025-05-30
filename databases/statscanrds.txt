@@ -1,0 +1,12 @@
+# added Nov8/2022
+
+Title Statistics Canada: Rich Data Services (20221108)
+HTTPHeader -request -process X-XSRF-TOKEN
+URL https://rich-data-services.statcan.gc.ca/rds/en/
+HJ https://rich-data-services.statcan.gc.ca
+DJ rich-data-services.statcan.gc.ca
+DJ www.statcan.gc.ca
+DJ statcan.gc.ca
+
+
+

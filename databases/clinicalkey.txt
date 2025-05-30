@@ -1,0 +1,29 @@
+# Feb 8/2022; updated Feb 28/2025
+HTTPMethod PUT
+HTTPMethod DELETE
+ProxyHostnameEdit www.clinicalkey.com$ www-clinicalkey-com
+AnonymousURL +https://eolsapi.elsevier.com/api/*
+Title ClinicalKey (updated 20250217)
+HTTPHeader -request -process CkApp-Request-Product
+HTTPHeader -request -process CK-Path
+HTTPHeader -request -process X-CkApp-Request-Locale
+HTTPHeader -request -process X-Ckm-Product
+HTTPHeader -request -process X-Ck-Request-Id
+MimeFilter application/json .* javascript
+URL https://www.clinicalkey.com
+HJ www.clinicalkey.com
+HJ www.clinicalkey.es
+HJ www.clinicalkey.com.au
+HJ www2.clinicalkey.com
+HJ https://www2.clinicalkey.com
+HJ https://www.clinicalkey.es
+HJ https://www.clinicalkey.com.au
+DJ clinicalkey.es
+DJ clinicalkey.com
+DJ clinicalkey.com.au
+HJ t.clinicalsolutions.elsevier.com
+DJ elsevier.com
+AnonymousURL -*
+NeverProxy cdn.clinicalkey.com
+NeverProxy jigsaw.elsevier.com
+NeverProxy clinicalkeymeded.elsevier.com

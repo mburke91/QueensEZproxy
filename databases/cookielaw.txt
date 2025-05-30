@@ -1,0 +1,66 @@
+# May 26/2022; updated Apr18/2023; updated Sept29/2023; updated Oct23/2023;updated on 20240430
+AnonymousURL +*
+Title -hide CookieLaw atoz
+HTTPHeader -Request -process Sec-*
+HTTPHeader -Response -process CF-*
+HTTPHeader -Response -process Expect-CT
+URL https://cdn.cookielaw.org
+DJ cookielaw.org
+DJ cookiepro.com
+DJ onetrust.com
+Find domain=."+a[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+b[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+c[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+d[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+e[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+f[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+g[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+h[0]+"
+Replace domain="[+location.hostname+"
+Find domain=."+i[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+j[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+k[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+l[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+m[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+n[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+o[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+p[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+q[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+r[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+s[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+s[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+t[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+u[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+v[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+w[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+x[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+y[0]+"
+Replace domain="+location.hostname+"
+Find domain=."+z[0]+"
+Replace domain="+location.hostname+"
+AnonymousURL -*
+
